@@ -2,8 +2,19 @@
   <!-- to include navbar -->
 
   <h1 id="titleOfPage">Resident Health Summary</h1>
-  <h4 class="temp">Temperature</h4>
-  <h4 class="respRate">Respiratory Rate</h4>
+  <div>
+    <div class="temp">
+      Temperature<br>
+      <!-- {{tempData}} -->
+    </div>
+
+    <div class="respRate">
+      Respiratory Rate<br>
+      <!-- {{RespData}} -->
+    </div>
+  </div>
+  
+  
 
       
 </template>
@@ -19,9 +30,10 @@ export default {
     text-align: left;
   }
   .temp, .respRate{
-    border-block: ;
+    border-block: left;
+    border: 1px grey;
   }
 
-  
+
 
 </style>
