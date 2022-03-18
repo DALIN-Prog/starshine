@@ -1,4 +1,5 @@
 <template>
+    <!-- to include navbar -->
     <h1 id="titleOfPage">Resident Management</h1>
     <h3 id="appt">Appointments #</h3>
     <h3 id="res">Residents #</h3>
@@ -8,7 +9,7 @@
 
     </div>
 
-    <div class="table-responsive">
+    <div class="table">
         <table class="table table-striped table-sm">
         <thead>
             <tr>
@@ -39,6 +40,21 @@ export default {
         display: inline-block;
         text-align:Left;
         border-radius: 2px;
+    }
+
+    .table {
+        border-collapse:collapse;
+        width: 100%;
+        border:solid rgb(54, 93, 138);
+    }
+
+    th, td {
+    border: 1px solid #dddddd;
+    padding: 15px;
+}
+
+    tr:nth-child(even){
+        background-color: rgb(198, 229, 238);
     }
 
 </style>
