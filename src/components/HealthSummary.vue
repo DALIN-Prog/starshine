@@ -1,6 +1,7 @@
 <template>
     <!-- to include navbar -->
-  <h2>Section title</h2>
+
+  <h1 id="titleOfPage">Resident Health Summary Page</h1>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
           <thead>
@@ -140,5 +141,7 @@ export default {
 </script>
 
 <style>
-
+  #title{
+    text-align: center;
+  }
 </style>
