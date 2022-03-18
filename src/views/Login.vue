@@ -16,22 +16,21 @@ export default {
         UserNavBar
     },
     mounted() {
-    //calling the ui instance
-    var ui = firebaseui.auth.AuthUI.getInstance();
-    if(!ui) {
-        //We only need to create the instance only one time
-        //Initialize the FirebaseUI widget using Firebase
-        ui = new firebaseui.auth.AuthUI(firebase.auth());
-    }
+        //calling the ui instance
+        var ui = firebaseui.auth.AuthUI.getInstance();
+        if(!ui) {
+            //We only need to create the instance only one time
+            //Initialize the FirebaseUI widget using Firebase
+            ui = new firebaseui.auth.AuthUI(firebase.auth());
+        }
 
-    var uiconfig = {
-        signInSuccessURL: "/home",
-        signInOptions:[
-        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-        firebase.auth.EmailAuthProvider.PROVIDER_ID
-        ] 
-    }
-    ui.start("#firebaseui-auth-container", uiconfig);
+        var uiconfig = {
+            signInSuccessURL: "/home",
+            signInOptions:[
+            firebase.auth.EmailAuthProvider.PROVIDER_ID
+            ] 
+        }
+        ui.start("#firebaseui-auth-container", uiconfig);
     }
 
 }
