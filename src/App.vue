@@ -1,29 +1,27 @@
 <template>
-  <UserNavBar/>
+    <LandingPage/>
 </template>
 
 <script>
-import UserNavBar from "./components/UserNavBar.vue"
+import LandingPage from "./views/LandingPage.vue"
 
 export default {
   name: 'App',
   components: {
-   UserNavBar
+   LandingPage,
+   
   },
   data() {
     return {
-      formEntry:"",
-      title: "yoy",
-      nonsense:""
+      
     }
   },
   methods: {
-    change(x) {
-      this.title = x
-    }
+    
   }
 }
 </script>
 
 <style>
+  
 </style>
