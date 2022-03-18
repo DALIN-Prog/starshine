@@ -1,6 +1,6 @@
 <template>
-  <!-- to include navbar -->
-
+  <!-- to include navbar (to be personalised) -->
+  <UserNavBar/>
   <h1 id="titleOfPage">Resident Health Summary</h1>
   <div>
     <div class="bloodP">
@@ -33,9 +33,32 @@
 </template>
 
 <script>
+/* import { getAuth, unAuthStateChanged, signOut } from "firebase/auth"; */
+import UserNavBar from '@/components/UserNavBar.vue'
+
 export default {
   name: "HealthSum",
+  components: {
+    UserNavBar
+  }
   
+
+    /* data () {
+        return {
+            user:false,
+        }
+    },
+
+    mounted () {
+        const auth = getAuth();
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                this.user = user;
+            }
+        })
+    } */
+
+}
 
 
 }

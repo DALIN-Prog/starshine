@@ -1,5 +1,6 @@
 <template>
     <!-- to include navbar -->
+    <UserNavBar/>
     <h1 id="titleOfPage">Resident Management</h1>
     <h3 id="appt">Appointments #</h3>
     <h3 id="res">Residents #</h3>
@@ -30,9 +31,26 @@
 </template>
 
 <script>
+/* import { getAuth, unAuthStateChanged, signOut } from "firebase/auth"; */
+import UserNavBar from '@/components/UserNavBar.vue'
+
 export default {
     name: "ResMgmt",
     
+    /* data () {
+        return {
+            user:false,
+        }
+    },
+
+    mounted () {
+        const auth = getAuth();
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                this.user = user;
+            }
+        })
+    } */
 }
 </script>
 
