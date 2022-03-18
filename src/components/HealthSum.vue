@@ -1,6 +1,6 @@
 <template>
   <!-- to include navbar (to be personalised) -->
-  <UserNavBar/>
+  <!-- <UserNavBar/> -->
   <h1 id="titleOfPage">Resident Health Summary</h1>
   <div>
     <div class="bloodP">

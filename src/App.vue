@@ -1,14 +1,17 @@
 <template>
-  <UserNavBar/>
+  <!-- <!-<UserNavBar/> -->
+  <ResMgmt/>
 </template>
 
 <script>
-import UserNavBar from "./components/UserNavBar.vue"
+//import UserNavBar from "./components/UserNavBar.vue"
+import ResMgmt from "./components/ResMgmt.vue"
 
 export default {
   name: 'App',
   components: {
-   UserNavBar
+   //UserNavBar,
+   ResMgmt
   },
   data() {
     return {
