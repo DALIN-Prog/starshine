@@ -34,12 +34,11 @@
 
 <script>
 /* import { getAuth, unAuthStateChanged, signOut } from "firebase/auth"; */
-import UserNavBar from '@/components/UserNavBar.vue'
+/* import UserNavBar from '@/components/UserNavBar.vue' */
 
 export default {
   name: "HealthSum",
   components: {
-    UserNavBar
   }
   
 
@@ -61,7 +60,7 @@ export default {
 }
 
 
-}
+
 </script>
 
 <style>

@@ -1,9 +1,9 @@
 <template>
     <!-- to include navbar -->
-    <UserNavBar/>
+    <!-- <UserNavBar/> -->
     <h1 id="titleOfPage">Resident Management</h1>
     <h3 id="appt">Appointments #</h3>
-    <h3 id="res">Residents #</h3>
+    <h3 id="res">Residents Number</h3>
     <div class="search" style="text-align:right;">
         <input class="searchButton" type="text" placeholder="Search" aria-label="Search">
         <button>Search</button>
@@ -32,7 +32,7 @@
 
 <script>
 /* import { getAuth, unAuthStateChanged, signOut } from "firebase/auth"; */
-import UserNavBar from '@/components/UserNavBar.vue'
+/* import UserNavBar from '@/components/UserNavBar.vue' */
 
 export default {
     name: "ResMgmt",
