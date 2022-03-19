@@ -1,14 +1,17 @@
 <template>
   <UserNavBar/>
+  <AboutUs/>
 </template>
 
 <script>
 import UserNavBar from "./components/UserNavBar.vue"
+import AboutUs from "./components/AboutUs.vue"
 
 export default {
   name: 'App',
   components: {
-   UserNavBar
+   UserNavBar,
+   AboutUs
   },
   data() {
     return {
