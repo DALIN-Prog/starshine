@@ -1,14 +1,16 @@
 <template>
     <UserNavBar/>
-    <h1>Landing page</h1>
+    <AboutUs/>
 </template>
 
 <script>
 import UserNavBar from "../components/UserNavBar.vue"
+import AboutUs from "../components/AboutUs.vue"
 export default {
     name: "LandingPage",
     components: {
-        UserNavBar
+        UserNavBar,
+        AboutUs
     },
     methods: {
 
