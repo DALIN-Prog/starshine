@@ -10,6 +10,7 @@ import "firebase/compat/auth";
 import * as firebaseui from 'firebaseui';
 import "firebaseui/dist/firebaseui.css";
 import UserNavBar from "../components/UserNavBar.vue"
+
 export default {
     name: "Login",
     components: {

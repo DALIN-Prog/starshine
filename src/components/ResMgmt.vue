@@ -2,8 +2,9 @@
     <!-- to include navbar -->
     <!-- <UserNavBar/> -->
     <h1 id="titleOfPage">Resident Management</h1>
-    <h3 id="appt">Appointments #</h3>
-    <h3 id="res">Residents Number</h3>
+    <h3 id="appt">Appointments No.</h3>
+    <h3 id="res">Residents No.</h3>
+
     <div class="search" style="text-align:right;">
         <input class="searchButton" type="text" placeholder="Search" aria-label="Search">
         <button>Search</button>
@@ -25,6 +26,7 @@
             <th scope="col">Actions</th>
             </tr>
         </thead>
+        
         </table>
     </div>
 
@@ -77,7 +79,7 @@ export default {
     }
 
     .searchButton: hover{
-        background-color: blue;
+        border-color: green;
         border-radius: 1px;
     }
 
