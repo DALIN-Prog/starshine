@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import LandingPage from "../views/LandingPage.vue";
 import Login from "../views/Login.vue";
+import HealthSum from "../views/HealthSum.vue";
 
 const routes = [
   {
@@ -14,7 +15,9 @@ const routes = [
     component: Login,
   },
   {
-    path: "/"
+    path: "/HealthSum",
+    name: "HealthSum",
+    component: HealthSum,
   }
 ];
 

@@ -1,6 +1,5 @@
 <template>
-    <!-- to include navbar -->
-    <!-- <UserNavBar/> -->
+    <UserNavBar/>
     <h1 id="titleOfPage">Resident Management</h1>
     <h3 id="appt">Appointments No.</h3>
     <h3 id="res">Residents No.</h3>
@@ -34,11 +33,13 @@
 
 <script>
 /* import { getAuth, unAuthStateChanged, signOut } from "firebase/auth"; */
-/* import UserNavBar from '@/components/UserNavBar.vue' */
+import UserNavBar from '@/components/UserNavBar.vue'
 
 export default {
     name: "ResMgmt",
-    
+    components:
+        UserNavBar
+
     /* data () {
         return {
             user:false,
