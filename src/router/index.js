@@ -3,6 +3,7 @@ import LandingPage from "../views/LandingPage.vue";
 import Login from "../views/Login.vue";
 import HealthSum from "../views/HealthSum.vue";
 import ResMgmt from "../views/ResMgmt.vue";
+import HistoricalData from "../components/HistoricalData.vue";
 
 const routes = [
   {
@@ -24,7 +25,12 @@ const routes = [
     path: "/ResMgmt",
     name: "ResMgmt",
     component: ResMgmt,
-  }
+  },
+  {
+    path: "/HistoricalData",
+    name: "HistoricalData",
+    component: HistoricalData,
+  },
 ];
 
 const router = createRouter({
