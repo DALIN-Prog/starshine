@@ -61,7 +61,6 @@ export default {
         grid-template-columns: 90% 10%;
         /* float: right; */
         margin: 25px;
-        
         /* position: fixed; */
     }
     #addBtn{

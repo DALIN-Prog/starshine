@@ -41,7 +41,7 @@
           <br>
           <div class="links">
             <div class="histData">
-              <a href="">View Historical Data</a> <!-- to link to histDataPage -->
+              <a href="/HistoricalData">View Historical Data</a> <!-- link to histDataPage -->
             </div>
 
             <br>
