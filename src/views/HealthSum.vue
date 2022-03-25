@@ -1,53 +1,63 @@
 <template>
-  
   <UserNavBar/>
   <div class = "block">
-    <div class="pageName">
-      <img src="@/assets/healthcare.png" id="pic" style="width:75px;height:75px;float:left">
-      <h1 id="title">Resident Health<br> Summary</h1>
-    </div>
 
     <div class="vitals">
-      <div class="bloodP">
-        <img src="@/assets/heartpressure.png" id="pic" style="width:75px;height:75px;float:left">
-        <h3>Blood Pressure</h3><br>
-        <!-- {{BloodP}} -->
+        <div class="top">
+
+          <div class="pageName">
+            <img src="@/assets/healthcare.png" id="icon">
+            <h1 id="title">Resident Health Summary</h1>
+          </div>
+
+          <div id="bloodP">
+            <img src="@/assets/heartpressure.png" id="icon">
+            <h3>Blood Pressure</h3><br>
+            <!-- {{BloodP}} -->
+          </div>
+
+          <div id="heartRate">
+            <img src="@/assets/heartrate.png" id="icon">
+            <h3>Heart Rate</h3><br>
+            <!-- {{HeartR}} -->
+          </div>
+        </div>
+
+      <div class="bottom">
+        <div class="left">
+
+          <div id="temp">
+            <img src="@/assets/temperature.png" id="icon">
+            <h3>Temperature</h3><br>
+            <!-- {{tempData}} -->
+          </div>
+
+          <div id="respRate">
+            <img src="@/assets/breath.png" id="icon">
+            <h3>Respiratory Rate</h3><br>
+            <!-- {{RespData}} -->
+          </div>
+
+          <br>
+          <div class="links">
+            <div class="histData">
+              <a href="">View Historical Data</a> <!-- to link to histDataPage -->
+            </div>
+
+            <br>
+            <button id="addbtn" >Add</button> <!-- only for admin -->
+          </div>
+        </div>
+
+        <div class="chart">
+          <h4>Dashboard</h4>
+          <!-- input chart here -->
+        </div>
       </div>
-
-      <div class="heartRate">
-        <img src="@/assets/heartrate.png" id="pic" style="width:75px;height:75px;float:left">
-        <h3>Heart Rate</h3><br>
-        <!-- {{HeartR}} -->
-      </div>
-
-      <div class="temp">
-        <img src="@/assets/temperature.png" id="pic" style="width:75px;height:75px;float:left">
-        <h3>Temperature</h3><br>
-        <!-- {{tempData}} -->
-      </div>
-
-      <div class="respRate">
-        <img src="@/assets/breath.png" id="pic" style="width:75px;height:75px;float:left">
-        <h3>Respiratory Rate</h3><br>
-        <!-- {{RespData}} -->
-      </div>
-
-      <br>
-      <div class="histData">
-        <a href="">View Historical Data</a>
-      </div>
-
-      <br>
-      <button id="addbtn">Add</button>
-
-
-    
 
     </div>
   </div>
   
-  
-
       
 </template>
 
@@ -82,46 +92,70 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
   .block{
-    margin: 10px;
-    float: left;
+    margin: 25px;
+    align-content: center;
   }
-
+  #icon{
+    width:75px;
+    height:75px;
+    float:left;
+  }
   .pageName{
     display: inline-block;
-    float: left;
     text-align: center;
+    float: left;
     background-color:rgb(223, 128, 180);
     color: white;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 15px;
   }
   #title{
-    float: left;
+    /* float: left; */
     margin-left: 10px;
   }
-  .temp, .respRate, .bloodP, .heartRate{
+  #temp, #respRate, #bloodP, #heartRate, .chart{
     display: inline-block;
     text-align: center;
     font-weight: bold;
-    background-color: rgb(212, 240, 236);
-    border: 5px grey;
-    padding: 90px;
-    margin: 50px;
-    /* margin-right: 50px; */
-    box-shadow: 3px 3px lightblue;
+    background-color: rgb(197, 214, 214);
+    padding: 20px;
+    margin: 10px 25px 10px 25px;
+    box-shadow: 3px 3px rgb(159, 163, 165);
+    border-radius: 15px;
   }
-  .histData {
-    margin: 10px;
+  .top, .left, .bottom{
+    display: grid;
+    grid-gap: 20px;
   }
-  #addbtn{
-    float: left;
+  .top{
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .bottom{
+    grid-template-columns: 1fr 2fr;
+  }
+  /* .chart{
+    padding: 200px 20px;
+    margin: 10px 25px;
+    background-color: rgb(178, 226, 216);
+    border-radius:10px;
+  } */
+  .links{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .histData{
+    margin: 2% 10%;
+    font-size: 25px;
+  }
+  button{
+    padding: 1px 20px;
     background-color: rgb(19, 130, 233);
     color: white;
     border-radius: 10px;
     font-size: 150%;
-
   }
 
 
