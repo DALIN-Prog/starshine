@@ -45,7 +45,7 @@
             </div>
 
             <br>
-            <button id="addbtn" >Add</button> <!-- only for admin -->
+            <button id="addbtn" v-on:click= "stop">Add</button> <!-- only for admin -->
           </div>
         </div>
 
@@ -150,7 +150,7 @@ export default {
     margin: 2% 10%;
     font-size: 25px;
   }
-  button{
+  #addbtn{
     padding: 1px 20px;
     background-color: rgb(19, 130, 233);
     color: white;

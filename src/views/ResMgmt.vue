@@ -135,8 +135,9 @@ export default {
         display: grid;
         grid-gap: 20px;
         border-collapse:collapse;
-        border:solid rgb(54, 93, 138);
+        box-shadow: 2px solid rgb(120, 147, 179);
         margin: 25px;
+        text-align: center;
     }
 
     th, td {
@@ -147,7 +148,5 @@ export default {
     tr:nth-child(even){
         background-color: rgb(198, 229, 238);
     }
-
-    
 
 </style>
