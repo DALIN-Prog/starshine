@@ -5,10 +5,11 @@
 
 <script>
 import UserNavBar from "../components/UserNavBar.vue"
+
 export default {
     name: "LandingPage",
     components: {
-        UserNavBar
+        UserNavBar,
     },
     methods: {
 
