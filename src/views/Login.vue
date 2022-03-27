@@ -10,6 +10,7 @@ import "firebase/compat/auth";
 import * as firebaseui from 'firebaseui';
 import "firebaseui/dist/firebaseui.css";
 import UserNavBar from "../components/UserNavBar.vue"
+
 export default {
     name: "Login",
     components: {
@@ -25,7 +26,7 @@ export default {
         }
 
         var uiconfig = {
-            signInSuccessURL: "/home",
+            signInSuccessURL: "/ResMgmt",
             signInOptions:[
             firebase.auth.EmailAuthProvider.PROVIDER_ID
             ] 
