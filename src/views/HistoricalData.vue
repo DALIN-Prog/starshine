@@ -1,8 +1,10 @@
 <template>
     <UserNavBar/>
-    <div class="topRow">
-        <h1 id="title" style="text-align:center"><!-- {{this.user}} -->'s Past Data</h1>
-        <button id="addBtn" v-on:click="stop">Add</button>
+    <div class="container">
+        <div class="row">
+            <h2 id="title" style="text-align:center">{{this.user.uid}}'s Past Data</h2>
+            <router-link class="btn btn-outline-primary btn-lg" to="#">Add Vital Points</router-link>
+        </div>
     </div>
 
     <div class="histTable">
@@ -47,7 +49,7 @@ export default {
         const auth = getAuth();
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                this.user = user;
+                this.user = auth.currentUser;
             }
         })
     }
@@ -56,20 +58,13 @@ export default {
 </script>
 
 <style>
-    .topRow{
-        display: grid;
-        grid-template-columns: 90% 10%;
-        /* float: right; */
-        margin: 25px;
-        /* position: fixed; */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Sacramento&display=swap');
+    #title {
+        font-family: Merriweather;
+        margin: 16px 0 16px 0;
     }
-    #addBtn{
-        padding: 1px 20px;
-        background-color: rgb(19, 130, 233);
-        color: white;
-        border-radius: 10px;
-        font-size: 150%;
-    }
+
+    
     .histTable {
         grid-gap: 20px;
         border-collapse:collapse;
