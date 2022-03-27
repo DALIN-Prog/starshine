@@ -10,10 +10,27 @@
             <li class="nav-item">
               <router-link to="/" class="nav-link">Home</router-link>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" v-if="!user">
               <router-link to="#" class="nav-link">Contact</router-link>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" v-if="user">
+              <router-link to="/HealthSummary" class="nav-link">Dashboard</router-link>
+            </li>
+            <li class="nav-item" v-if="user">
+              <router-link to="#" class="nav-link">Appointment</router-link>
+            </li>
+            <li class="nav-item dropdown" v-if="user">
+              <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Profile
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><router-link to="#" class="dropdown-item">Contact</router-link></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#" @click="logOut()">Logout</a></li>
+              </ul>
+            </li>
+            <li class="nav-item" v-else>
               <router-link to="/login" class="nav-link">Login</router-link>
             </li>
           </ul>
@@ -23,11 +40,30 @@
 </template>
 
 <script>
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth"
 export default {
   name: "UserNavBar",
+  data() {
+    return {
+      user: false
+    }
+  },
   methods: {
-
-  }
+    logOut() {
+      const auth = getAuth();
+      const user = auth.currentUser
+      signOut(auth, user)
+      this.$router.push({
+        name: "LandingPage"
+      })
+    }
+  },
+  mounted() {
+    const auth = getAuth();
+    onAuthStateChanged(auth, user => {
+      this.user = user;
+      })
+  },
 
     
 }

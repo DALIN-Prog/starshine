@@ -3,7 +3,7 @@ import LandingPage from "../views/LandingPage.vue";
 import Login from "../views/Login.vue";
 import HealthSum from "../views/HealthSummary.vue";
 import ResMgmt from "../views/ResidentManagement.vue";
-import HistoricalData from "../components/HistoricalData.vue";
+import HistoricalData from "../views/HistoricalData.vue";
 
 const routes = [
   {
