@@ -26,7 +26,7 @@ export default {
         }
 
         var uiconfig = {
-            signInSuccessURL: "/ResMgmt",
+            signInSuccessURL: "/",
             signInOptions:[
             firebase.auth.EmailAuthProvider.PROVIDER_ID
             ] 

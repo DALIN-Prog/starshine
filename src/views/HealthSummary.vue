@@ -66,7 +66,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import UserNavBar from '@/components/UserNavBar.vue'
 
 export default {
-  name: "HealthSum",
+  name: "HealthSummary",
   components: {
     UserNavBar
   },

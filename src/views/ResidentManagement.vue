@@ -52,7 +52,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import UserNavBar from '@/components/UserNavBar.vue'
 
 export default {
-    name: "ResMgmt",
+    name: "ResidentManagement",
     components: {
         UserNavBar
     },
