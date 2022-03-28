@@ -2,8 +2,8 @@
     <UserNavBar/>
     <h2 class="pageName">Resident Management</h2>
     <div class="container">
-        <div class="row">
-            <div class="col-sm-4 appt-card">
+        <div class="row justify-content-center">
+            <div class="col-sm-4">
                 <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Appointments</h5>
