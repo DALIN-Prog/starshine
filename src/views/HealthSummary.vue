@@ -219,8 +219,7 @@ export default {
     margin-top: 16px;
   }
 
-  .pageName{
-    
+  .pageName{  
     font-family: Merriweather;
     margin-left: 12px;
   }

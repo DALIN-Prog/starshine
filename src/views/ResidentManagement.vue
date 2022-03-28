@@ -1,30 +1,26 @@
 <template>
     <UserNavBar/>
-    <div class="top">
-        <div id="titleOfPage">
-            <img src="@/assets/treatment.png" id="icon">
-            <h1>Resident Management</h1> 
+    <h2 class="pageName">Resident Management</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4 appt-card">
+                <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Appointments</h5>
+                    <p class="card-text text-center fs-3 fw-bold">Value</p>
+                </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Residents</h5>
+                    <p class="card-text text-center fs-3 fw-bold">Value</p>
+                </div>
+                </div>
+            </div>
         </div>
-        
-        <div id="appt">
-            <img src="@/assets/appointment.png" id="icon">
-            <h3>Appointments</h3>
-        </div>
-
-        <div id="res">
-            <img src="@/assets/people.png" id="icon">
-            <h3 >Residents</h3>
-        </div>
-
-        <div class="search">
-            <input class="searchInput" type="text" placeholder="Search" aria-label="Search">
-            <button id="searchBtn">Search</button>
-        </div>
-
     </div>
-    
-
-    <br>
 
     <div class="resTable">
         <table class="table table-striped table-sm">
@@ -75,6 +71,17 @@ export default {
 </script>
 
 <style>
+    .appt-card {
+        margin-left: 208px;
+    }
+
+    .card {
+        margin: 0 auto
+    }
+    .pageName{  
+        font-family: Merriweather;
+        margin-left: 12px;
+    }
     
     .top{
         display: grid;
