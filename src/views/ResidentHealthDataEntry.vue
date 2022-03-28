@@ -1,15 +1,18 @@
 <template>
+    <UserNavBar />
     <NewDataForm/>
 </template>
 
 <script>
-import NewDataForm from '@/components/NewDataForm.vue'
+import NewDataForm from '../components/NewDataForm.vue'
+import UserNavBar from "../components/UserNavBar.vue";
 //test
 export default {
-    name: 'Resident Health Data Entry',
+    name: 'ResidentHealthDataEntry',
 
     components: {
-        NewDataForm
+        NewDataForm,
+        UserNavBar
     }
 }
 </script>
