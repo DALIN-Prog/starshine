@@ -71,7 +71,12 @@ import firebase from "../uifire.js";
 import "firebase/compat/auth";
 import * as firebaseui from "firebaseui";
 import "firebaseui/dist/firebaseui.css";
+
 import UserNavBar from "../components/UserNavBar.vue";
+
+import UserNavBar from "../components/UserNavBar.vue"
+
+
 export default {
   name: "Login",
   components: {
@@ -98,6 +103,7 @@ export default {
         });
       alert("check!");
     },
+
   },
   mounted() {
     //calling the ui instance
@@ -106,6 +112,24 @@ export default {
       //We only need to create the instance only one time
       //Initialize the FirebaseUI widget using Firebase
       ui = new firebaseui.auth.AuthUI(firebase.auth());
+
+    mounted() {
+        //calling the ui instance
+        var ui = firebaseui.auth.AuthUI.getInstance();
+        if(!ui) {
+            //We only need to create the instance only one time
+            //Initialize the FirebaseUI widget using Firebase
+            ui = new firebaseui.auth.AuthUI(firebase.auth());
+        }
+
+        var uiconfig = {
+            signInSuccessURL: "/",
+            signInOptions:[
+            firebase.auth.EmailAuthProvider.PROVIDER_ID
+            ] 
+        }
+        ui.start("#firebaseui-auth-container", uiconfig);
+
     }
 
     var uiconfig = {
