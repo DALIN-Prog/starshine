@@ -52,7 +52,6 @@
 <script>
 import firebase from "../uifire.js";
 import "firebase/compat/auth";
-import * as firebaseui from 'firebaseui';
 import "firebaseui/dist/firebaseui.css";
 import UserNavBar from "../components/UserNavBar.vue"
 
@@ -74,29 +73,14 @@ export default {
         submit() {
             firebase.auth()
             .signInWithEmailAndPassword(this.form.email, this.form.password)
+            .then(() => {
+                this.$router.push("/")
+            })
             .catch((err) => {
                 this.error = err.message;
-                //alert("Please Try Again.");
             });
-            alert("check!");
+            
         }
-    },
-    mounted() {
-        //calling the ui instance
-        var ui = firebaseui.auth.AuthUI.getInstance();
-        if(!ui) {
-            //We only need to create the instance only one time
-            //Initialize the FirebaseUI widget using Firebase
-            ui = new firebaseui.auth.AuthUI(firebase.auth());
-        }
-
-        var uiconfig = {
-            signInSuccessURL: "/",
-            signInOptions:[
-            firebase.auth.EmailAuthProvider.PROVIDER_ID
-            ] 
-        }
-        ui.start("#firebaseui-auth-container", uiconfig);
     }
 
 }
