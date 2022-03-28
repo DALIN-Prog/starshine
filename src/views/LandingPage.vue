@@ -1,7 +1,11 @@
 <template>
     <UserNavBar/>
     <div id="about">
-        <h1><u>{{this.welcomeMessage}}</u></h1>
+        <div class="container">
+            <div class="row">
+                <h1 id="title">{{this.welcomeMessage}}</h1>
+            </div>
+        </div>
         
         <img src="@/assets/landing.jpg" id="pic">
         <h4 id="intro">
@@ -54,6 +58,11 @@ export default {
 
     body {
         background-color: #EFF6F8;
+    }
+
+    .title {
+        text-align: center;
+        font-family: Merriweather;
     }
 
     #pic {
