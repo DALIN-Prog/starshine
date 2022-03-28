@@ -14,7 +14,11 @@
 
 <script>
 import UserNavBar from "../components/UserNavBar.vue"
+<<<<<<< HEAD
+
+=======
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+>>>>>>> 474f46c844af18814f7e052953c1c42ae14f5c88
 export default {
     name: "LandingPage",
     components: {

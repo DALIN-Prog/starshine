@@ -38,7 +38,6 @@
                     type="email"
                     class="form-control"
                     name="email"
-                    value
                     required
                     autofocus
                     v-model="form.email"
@@ -78,7 +77,6 @@
                     type="contact"
                     class="form-control"
                     name="contact"
-                    value
                     required
                     autofocus
                     v-model="form.contact"
@@ -99,7 +97,6 @@
                     type="Bed Number"
                     class="form-control"
                     name="Bed Number"
-                    value
                     required
                     autofocus
                     v-model="form.BedNumber"
@@ -124,9 +121,13 @@
 
 <script>
 import UserNavBar from "../components/UserNavBar.vue";
-import firebase from "../uifire.js";
-import { getDatabase } from "firebase/database";
-const db = getDatabase();
+import firebase from "@/uifire.js";
+import "firebase/compat/auth";
+import "firebaseui/dist/firebaseui.css";
+import firebaseApp from "../firebase.js";
+import { getFirestore } from "firebase/firestore";
+//import { doc, collection, getDocs, setDoc, query } from "firebase/firestore";
+const db = getFirestore(firebaseApp);
 
 export default {
   name: "AccountCreation",
@@ -200,7 +201,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .container {
   position: relative;
   top: 50%;

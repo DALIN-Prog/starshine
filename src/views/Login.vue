@@ -1,14 +1,31 @@
 <template>
   <UserNavBar />
+  <div
+    v-if="error"
+    class="alert alert-danger alert-dismissible fade show"
+    role="alert"
+  >
+    {{ error }}
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+  </div>
   <div class="container">
-    <div class="row justify-content-center">
+    <div class="row">
+      <h2 class="title mt-5">Welcome back!</h2>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row justify-content-center mt-5">
       <div class="col-md-8">
         <div class="card">
-          <div class="card-header">Login</div>
+          <div class="card-header"><br /></div>
           <div class="card-body">
-            <div v-if="error" class="alert alert-danger">{{ error }}</div>
             <form action="#" @submit.prevent="submit">
-              <div class="form-group row">
+              <div class="form-group row mt-4 mb-4">
                 <label for="email" class="col-md-4 col-form-label text-md-right"
                   >Email</label
                 >
@@ -19,18 +36,18 @@
                     type="email"
                     class="form-control"
                     name="email"
-                    value
-                    required
-                    autofocus
                     v-model="form.email"
+                    placeholder="patient@starshine.com"
+                    required
                   />
                 </div>
               </div>
 
-              <div class="form-group row">
+              <div class="form-group row mt-4 mb-4">
                 <label
                   for="password"
                   class="col-md-4 col-form-label text-md-right"
+                  aria-placeholder="patient@starshine.com"
                   >Password</label
                 >
 
@@ -40,8 +57,9 @@
                     type="password"
                     class="form-control"
                     name="password"
-                    required
                     v-model="form.password"
+                    placeholder="Password"
+                    required
                   />
                 </div>
               </div>
@@ -69,7 +87,6 @@
 <script>
 import firebase from "../uifire.js";
 import "firebase/compat/auth";
-import * as firebaseui from "firebaseui";
 import "firebaseui/dist/firebaseui.css";
 
 import UserNavBar from "../components/UserNavBar.vue";
@@ -103,33 +120,27 @@ export default {
         });
       alert("check!");
     },
-
-  },
-  mounted() {
-    //calling the ui instance
-    var ui = firebaseui.auth.AuthUI.getInstance();
-    if (!ui) {
-      //We only need to create the instance only one time
-      //Initialize the FirebaseUI widget using Firebase
-      ui = new firebaseui.auth.AuthUI(firebase.auth());
-
-    mounted() {
-        //calling the ui instance
-        var ui = firebaseui.auth.AuthUI.getInstance();
-        if(!ui) {
-            //We only need to create the instance only one time
-            //Initialize the FirebaseUI widget using Firebase
-            ui = new firebaseui.auth.AuthUI(firebase.auth());
+    data() {
+        return {
+            form: {
+                email: "",
+                password: "",
+            },
+            error: null,
         }
+    },
+    methods: {
+        submit() {
+            firebase.auth()
+            .signInWithEmailAndPassword(this.form.email, this.form.password)
+            .then(() => {
+                this.$router.push("/")
+            })
+            .catch((err) => {
+                this.error = err.message;
+            });
 
-        var uiconfig = {
-            signInSuccessURL: "/",
-            signInOptions:[
-            firebase.auth.EmailAuthProvider.PROVIDER_ID
-            ] 
         }
-        ui.start("#firebaseui-auth-container", uiconfig);
-
     }
 
     var uiconfig = {
@@ -145,6 +156,13 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Sacramento&display=swap");
+
+.title {
+  text-align: center;
+  font-family: Merriweather;
+}
+
 h1 {
   margin-top: 56px;
 }
