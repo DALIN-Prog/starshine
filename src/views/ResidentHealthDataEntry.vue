@@ -4,7 +4,7 @@
 
 <script>
 import NewDataForm from '@/components/NewDataForm.vue'
-
+//test
 export default {
     name: 'Resident Health Data Entry',
 
