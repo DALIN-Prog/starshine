@@ -1,9 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
 import LandingPage from "../views/LandingPage.vue";
 import Login from "../views/Login.vue";
+
+import AccountCreation from "../views/AccountCreation.vue";
+
 import HealthSum from "../views/HealthSummary.vue";
 import ResMgmt from "../views/ResidentManagement.vue";
 import HistoricalData from "../views/HistoricalData.vue";
+
 
 const routes = [
   {
@@ -17,6 +21,11 @@ const routes = [
     component: Login,
   },
   {
+
+    path: "/AccountCreation",
+    name: "AccountCreation",
+    component: AccountCreation,
+
     path: "/HealthSummary",
     name: "HealthSummary",
     component: HealthSum,
@@ -30,6 +39,7 @@ const routes = [
     path: "/HistoricalData",
     name: "HistoricalData",
     component: HistoricalData,
+
   },
 ];
 
