@@ -1,7 +1,7 @@
 <template>
     <UserNavBar/>
     <div id="about">
-        <h1><u>{{this.welcomeMessage}}</u></h1>
+        <h1>{{this.welcomeMessage}}</h1>
         
         <img src="@/assets/landing.jpg" id="pic">
         <h4 id="intro">
@@ -14,11 +14,7 @@
 
 <script>
 import UserNavBar from "../components/UserNavBar.vue"
-<<<<<<< HEAD
-
-=======
 import { getAuth, onAuthStateChanged } from "firebase/auth";
->>>>>>> 474f46c844af18814f7e052953c1c42ae14f5c88
 export default {
     name: "LandingPage",
     components: {
@@ -52,10 +48,6 @@ export default {
 </script>
 
 <style scoped>
-    h1 {
-        margin-top: 56px;
-    }
-
     body {
         background-color: #EFF6F8;
     }

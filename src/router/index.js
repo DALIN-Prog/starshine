@@ -5,6 +5,7 @@ import HealthSum from "../views/HealthSummary.vue";
 import ResMgmt from "../views/ResidentManagement.vue";
 import HistoricalData from "../views/HistoricalData.vue";
 import AccountCreation from "../views/AccountCreation.vue";
+import ResidentHealthDataEntry from "../views/ResidentHealthDataEntry.vue";
 
 const routes = [
   {
@@ -36,6 +37,11 @@ const routes = [
     path: "/AccountCreation",
     name: "AccountCreation",
     component: AccountCreation,
+  },
+  {
+    path: "/DataEntry",
+    name: "ResidentHealthDataEntry",
+    component: ResidentHealthDataEntry,
   },
 ];
 
