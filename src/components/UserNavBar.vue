@@ -11,7 +11,7 @@
               <router-link to="/" class="nav-link">Home</router-link>
             </li>
             <li class="nav-item" v-if="!user">
-              <router-link to="#" class="nav-link">Contact</router-link>
+              <router-link to="/ContactUs" class="nav-link">Contact</router-link>
             </li>
             <li class="nav-item" v-if="user">
               <router-link to="/HealthSummary" class="nav-link">Dashboard</router-link>
@@ -25,7 +25,7 @@
               </a>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><router-link to="#" class="dropdown-item">Contact</router-link></li>
+                <li><router-link to="/ContactUs" class="dropdown-item">Contact</router-link></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="#" @click="logOut()">Logout</a></li>
               </ul>

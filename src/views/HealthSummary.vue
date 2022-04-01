@@ -170,7 +170,6 @@ export default {
   components: {
     UserNavBar
   },
-  
   data () {
       return {
           user:false,
