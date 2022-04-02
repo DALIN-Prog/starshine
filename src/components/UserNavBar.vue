@@ -17,14 +17,14 @@
               <router-link to="/HealthSummary" class="nav-link">Dashboard</router-link>
             </li>
             <li class="nav-item" v-if="user">
-              <router-link to="#" class="nav-link">Appointment</router-link>
+              <router-link to="/Appointment" class="nav-link">Appointment</router-link>
             </li>
             <li class="nav-item dropdown" v-if="user">
               <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Profile
               </a>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><router-link class="dropdown-item" to="/HistoricalData">Historical Data</router-link></li>
                 <li><router-link to="/ContactUs" class="dropdown-item">Contact</router-link></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="#" @click="logOut()">Logout</a></li>
