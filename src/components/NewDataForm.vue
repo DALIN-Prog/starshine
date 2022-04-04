@@ -45,7 +45,7 @@
 <script>
     import firebaseApp from '../firebase.js';
     import { getFirestore } from "firebase/firestore";
-    import { doc, setDoc } from "firebase/firestore";
+    import { doc, setDoc, serverTimestamp } from "firebase/firestore";
     const db = getFirestore(firebaseApp);
     
     export default {
@@ -64,12 +64,15 @@
     
                 try {
                     const docRef = await setDoc(doc(db, "VitalPoint", residentID), {
-                        Temperature: a,
+                        residentID: residentID,
+                        temperature: a,
                         heartRate: b,
-                        BloodPressuree: c,
+                        bloodPressuree: c,
                         respiratoryRate: d,
                         condition: e,
-                        image: f
+                        image: f,
+                        created: serverTimestamp(),
+                        lastUpdated: serverTimestamp()
                     })
     
                     console.log(docRef);
