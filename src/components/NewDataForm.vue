@@ -66,14 +66,14 @@
                     const docRef = await setDoc(doc(db, "VitalPoint", residentID), {
                         Temperature: a,
                         heartRate: b,
-                        BloodPressuree: c,
+                        BloodPressure: c,
                         respiratoryRate: d,
                         condition: e,
                         image: f
                     })
     
                     console.log(docRef);
-                    document.getElementById('dataentryform').reset();
+                    document.getElementById("dataentryform").reset();
                     this.$emit("added");
                 }
     
