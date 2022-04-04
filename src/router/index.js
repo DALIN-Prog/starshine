@@ -1,10 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
 import LandingPage from "../views/LandingPage.vue";
 import Login from "../views/Login.vue";
+import ContactUs from "../views/ContactUs.vue";
 import HealthSum from "../views/HealthSummary.vue";
 import ResMgmt from "../views/ResidentManagement.vue";
 import HistoricalData from "../views/HistoricalData.vue";
 import AccountCreation from "../views/AccountCreation.vue";
+import Appointment from "../views/ClientAppointmentPage.vue";
+import ResidentHealthDataEntry from "../views/ResidentHealthDataEntry.vue";
 
 const routes = [
   {
@@ -36,6 +39,21 @@ const routes = [
     path: "/AccountCreation",
     name: "AccountCreation",
     component: AccountCreation,
+  },
+  {
+    path: "/ContactUs",
+    name: "ContactUs",
+    component: ContactUs,
+  },
+  {
+    path: "/appointment",
+    name: "Appointment",
+    component: Appointment,
+  },
+  {
+    path: "/DataEntry",
+    name: "ResidentHealthDataEntry",
+    component: ResidentHealthDataEntry,
   },
 ];
 
