@@ -1,4 +1,5 @@
 <template>
+    <UserNavBar/>
     <div class="calendar-container">
         <h1 id="header">Make an appointment to visit our residents here!</h1>
         <div class="year">
@@ -22,7 +23,12 @@
 </template>
 
 <script>
+import UserNavBar from '@/components/UserNavBar.vue'
 export default {
+    name: "Appointment",
+    components: {
+        UserNavBar
+    },
     props: ['start-date'],
     data () {
         return {
@@ -163,7 +169,7 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
     .calendar-container {
         padding: 2vw 3vw;
         height: 600px;

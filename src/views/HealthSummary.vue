@@ -9,11 +9,11 @@
             <h5 class="card-title">Temperature</h5>
             <p class="card-text text-center fs-3 fw-bold">Value</p>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal1">
               Learn More
             </button>
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -40,11 +40,11 @@
             <h5 class="card-title">Blood Pressure</h5>
             <p class="card-text text-center fs-3 fw-bold">Value</p>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal2">
               Learn More
             </button>
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -71,11 +71,11 @@
             <h5 class="card-title">Heart Rate</h5>
             <p class="card-text text-center fs-3 fw-bold">Value</p>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal3">
               Learn More
             </button>
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -102,11 +102,11 @@
             <h5 class="card-title">Respiratory Rate</h5>
             <p class="card-text text-center fs-3 fw-bold">Value</p>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal4">
               Learn More
             </button>
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -154,7 +154,7 @@
         <line-chart :data="{'2022-05-13': 2, '2022-05-14': 5}" :download="true"></line-chart>
         <router-link type="button" class="btn btn-outline-primary btn-lg hist" to="/HistoricalData">View Historical Data</router-link>
 
-        <router-link type= "button" class="btn btn-outline-primary btn-lg add" to="#">Add Vital Points</router-link> <!-- only for admin -->
+        <router-link type= "button" class="btn btn-outline-primary btn-lg add" to="/DataEntry">Add Vital Points</router-link> <!-- only for admin -->
       </div>
     </div>
   </div>
@@ -170,7 +170,6 @@ export default {
   components: {
     UserNavBar
   },
-  
   data () {
       return {
           user:false,
