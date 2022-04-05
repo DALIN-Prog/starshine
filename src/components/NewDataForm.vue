@@ -75,7 +75,7 @@
                     })
     
                     console.log(docRef);
-                    document.getElementById('dataentryform').reset();
+                    document.getElementById("dataentryform").reset();
                     this.$emit("added");
                 }
     

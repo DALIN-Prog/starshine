@@ -70,7 +70,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
     .appt-card {
         margin-left: 208px;
     }
