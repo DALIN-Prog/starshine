@@ -6,7 +6,7 @@
 <script>
 import NewDataForm from '../components/NewDataForm.vue'
 import UserNavBar from "../components/UserNavBar.vue";
-//test
+
 export default {
     name: 'ResidentHealthDataEntry',
 
