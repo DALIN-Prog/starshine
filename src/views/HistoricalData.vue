@@ -7,35 +7,31 @@
         </div>
     </div>
 
-    <div id="histTable">
-        <table id="table">
-            <thead>
-                <tr>
-                <th scope="col">Date</th>
-                <th scope="col">Time</th>
-                <th scope="col">Blood Pressure</th>
-                <th scope="col">Temperature</th>
-                <th scope="col">Heart Rate</th>
-                <th scope="col">Respiratory Rate</th>
-                <th scope="col">Image</th>
-                <th scope="col">Created By</th>
-                <th scope="col">Actions</th>
-                </tr>
-            </thead>
-        </table>
+    <div class="container">
+        <table class="table table-striped table-hover" id="table">
+        <thead>
+            <tr>
+            <th scope="col">No.</th>
+            <th scope="col">Created At</th>
+            <th scope="col">Blood Pressure</th>
+            <th scope="col">Temperature</th>
+            <th scope="col">Heart Rate</th>
+            <th scope="col">Respiratory Rate</th>
+            <th scope="col">Image</th>
+            <th scope="col">Last Updated</th>
+            <th scope="col">Actions</th>
+            </tr>
+        </thead>
+    </table>
     </div>
-
-
+    
 </template>
 
 <script>
 import firebaseApp from '@/firebase.js';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-/* import { getFirestore } from "firebase/firestore"; */
-import { collection, getDocs, doc, deleteDoc, getFirestore, query, where} from "firebase/firestore";
-
+import { collection, getDocs, getFirestore, doc, deleteDoc } from "firebase/firestore";
 const db = getFirestore(firebaseApp);
-
 import UserNavBar from '@/components/UserNavBar.vue'
 
 export default {
@@ -49,104 +45,80 @@ export default {
             displayname: "",
             user: false,
             admin: false,
+            arr: [],
+            index: 0
+
         }
     },
 
     mounted() {
         const auth = getAuth();
-
-        this.fbuser = auth.currentUser;
-        this.display(this.fbuser.uid);
         onAuthStateChanged(auth, async user => {
             if (user) { // if logged in
                 this.user = auth.currentUser // set user to current user)
                 let documents = await getDocs(collection(db, "User"))
                 documents.forEach((docs) => {
                     let data = docs.data()
-                    //console.log(docs.id)
                     if (docs.id === this.user.uid) {
                         //console.log(data)
                         this.displayname = data.name //this.user.displayName
                         this.admin = data.isAdmin
                         //console.log(this.user);
                     }
-                }) 
+                })
+                let vitalPoint = await getDocs(collection(db, "VitalPoint"))
+                vitalPoint.forEach((docs) => {
+                    // console.log(docs.data())
+                    let data = docs.data()
+                    if (this.user.uid === data.residentID) {
+                        this.arr.push(docs)
+                    }
+                })
+                this.arr.sort(this.compare)
+                let index = 1
+                this.arr.forEach((obj) => {
+                    var table = document.getElementById("table")
+                    var row = table.insertRow(index)
+                    var indexCell = row.insertCell(0); var createCell = row.insertCell(1); var bpCell = row.insertCell(2); 
+                    var tempCell = row.insertCell(3); var hrCell = row.insertCell(4); var rpCell = row.insertCell(5); 
+                    var imgCell = row.insertCell(6); var lastCell = row.insertCell(7); var actionsCell = row.insertCell(8);
+                    indexCell.innerHTML = index;
+                    createCell.innerHTML = obj.data().created.toDate().toDateString().slice(4) + " " + obj.data().created.toDate().toLocaleTimeString('en-US');
+                    tempCell.innerHTML = obj.data().temperature + " ℃";
+                    bpCell.innerHTML = obj.data().bloodPressure + " mm Hg";
+                    hrCell.innerHTML = obj.data().heartRate + " bpm";
+                    rpCell.innerHTML = obj.data().respiratoryRate + " bpm";
+                    imgCell.innerHTML = "image";
+                    lastCell.innerHTML = obj.data().lastUpdated.toDate().toDateString().slice(4) + " " + obj.data().lastUpdated.toDate().toLocaleTimeString('en-US');
+                    const group = "<div class='btn-group' role='group' aria-label='Basic mixed styles example'>"
+                    const edit = "<button id='edit-" + obj.id + "' type='button' class='btn btn-primary btn-sm'>Edit</button>"
+                    const del = "<button id='del-" + obj.id + "' type='button' class='btn btn-danger btn-sm'>Delete</button></div>"
+                    actionsCell.innerHTML = group + edit + del;
+                    // var btnEdit = document.getElementById("edit-" + obj.id)
+                    var btnDelete = document.getElementById("del-" + obj.id)
+                    
+                    // btnEdit.addEventListener("click", () => {
+                    //     editData(obj.id);
+                    // });
+                    btnDelete.addEventListener("click", () => {
+                        this.deleteData(obj.id);
+                    });
+                    index++
+                })
             }
         })
     },
 
     methods: {
-        async display(user) {
-            const q = query(collection(db, "VitalPoint"), where("residentID", "==", String(user)));
-            /* let z = await getDocs(collection(db, "VitalPoint")) */
-            let z = await getDocs(q)
-            let ind = 1
-
-            z.forEach((docs) => {
-                console.log(docs.id)
-
-                let yy = docs.data()
-                var table = document.getElementById("table")
-                /* console.log("checking") */
-                var row = table.insertRow(ind)
-                row.className = "tableRow"
-
-                var name = (yy.created).toDate();
-                var date = (yy.lastUpdated).toDate();
-                var bloodp = (yy.bloodPressure)
-                var temp = (yy.temperature)
-                var hrate = (yy.heartRate)
-                var respRate = (yy.respiratoryRate)
-                var image = (yy.image)
-                var createBy = (yy.created).toDate();
-
-                var cell1 = row.insertCell(0); var cell2 = row.insertCell(1); var cell3 = row.insertCell(2);
-                var cell4 = row.insertCell(3); var cell5 = row.insertCell(4); var cell6 = row.insertCell(5);
-                var cell7 = row.insertCell(6); var cell8 = row.insertCell(7); var cell9 = row.insertCell(8);     
-
-                cell1.innerHTML = name; cell2.innerHTML = date; cell3.innerHTML = bloodp; cell4.innerHTML = temp; 
-                cell5.innerHTML = hrate; cell6.innerHTML = respRate; cell7.innerHTML = image; cell8.innerHTML = createBy;
-                
-                var bu = document.createElement("button")
-                bu.className = "rowDel"
-                /* bu.id = String(docs.id) */
-                bu.innerHTML = "Delete"
-                /* bu.innerHTML = <img src="bin.png"/> */
-                bu.onclick = ()=>{
-                    this.deleteinstrument(docs.id)
-                }
-                cell9.appendChild(bu)
-
-                ind+=1
-            })
-
+        compare: function (a, b) {
+            return b.data().created - a.data().created
         },
-
-        async addVitals(){
-            if (confirm("Going to add vital page for resident")) {
-                this.$router.push('DataEntry')
-            } else {
-                ""
-            }
-
-        },
-
-        async deleteinstrument(docID){      
-            if (confirm("You are going to delete info for " + this.user.uid)) {
-                await deleteDoc(doc(db,"VitalPoint",docID))
-                let tb = document.getElementById("table")
-                while (tb.rows.length >1){
-                    tb.deleteRow(1)
-                }
-            }
-            /* await deleteDoc(doc(db,"VitalPoint",docID))
-            let tb = document.getElementById("table")
-            while (tb.rows.length >1){
-                tb.deleteRow(1)
-            } */
-            this.display(this.fbuser)
+        deleteData: async function (docID) {
+            alert("You're deleting a vital point")
+            await deleteDoc(doc(db, "VitalPoint", docID))
+            location.reload();
         }
-
+        
     }
 
 }
@@ -157,42 +129,6 @@ export default {
     #title {
         font-family: Merriweather;
         margin: 16px 0 16px 0;
-    }
-    
-    #histTable {
-        display: grid;
-        grid-gap: 20px;
-        border-collapse:collapse;
-        margin: 25px;
-        text-align: center;
-        
-    }
-    thead{
-        background-color:rgb(99, 98, 119);
-        color: white;
-    }
-    th, td {
-    /* border: 1px solid #dddddd; */
-    padding: 15px;
-    }
-    /* #table tr:nth-child(even){
-        background-color: rgb(40, 116, 135);
-    } */
-    .tableRow{
-        color: black;
-    }
-
-    .tableRow:nth-child(even){
-        background-color: rgb(198, 229, 238);
-        
-    }
-    .tableRow:hover td{
-        background-color: rgb(75, 162, 189);
-    }
-
-    .rowDel{
-        color:rgb(243, 236, 236);
-        background-color: rgb(255, 94, 0);
     }
 
 </style>
