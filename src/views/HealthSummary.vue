@@ -185,16 +185,15 @@ export default {
       onAuthStateChanged(auth, async user => {
           if (user) {
               this.user = auth.currentUser // set user to current user)
-                let documents = await getDocs(collection(db, "User"))
-                documents.forEach((docs) => {
-                    let data = docs.data()
-                    if (docs.id === this.user.uid) {
-                        //console.log(data)
-                        this.displayname = data.name //this.user.displayName
-                        this.admin = data.isAdmin
-                        //console.log(this.user);
-                    }
-                })
+              let documents = await getDocs(collection(db, "User"))
+              documents.forEach((docs) => {
+                  let data = docs.data()
+                  if (docs.id === this.user.uid) {
+                      //console.log(data)
+                      this.admin = data.isAdmin
+                      //console.log(this.user);
+                  }
+              })
           }
       })
   }

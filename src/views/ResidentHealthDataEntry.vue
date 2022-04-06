@@ -1,7 +1,7 @@
 <template>
     <UserNavBar />
     <h2 class="header mt-4 mb-4">Add Vital Point For Resident</h2>
-    <div class="container justify-content-center">
+    <div class="container justify-content-center" v-if="admin">
         <div class="row">
             <div class="col-4"></div>
             <div class="mb-3 col-4">
@@ -54,15 +54,40 @@
 
 <script>
 import UserNavBar from "../components/UserNavBar.vue";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { collection, getDocs, getFirestore } from "firebase/firestore";
 import firebaseApp from '../firebase.js';
-import { getFirestore } from "firebase/firestore";
 import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 const db = getFirestore(firebaseApp);
 
 export default {
     name: 'ResidentHealthDataEntry',
+    data () {
+      return {
+          user:false,
+          admin: true,
+      }
+    },
     components: {
         UserNavBar
+    },
+    mounted() {
+        const auth = getAuth();
+        onAuthStateChanged(auth, async user => {
+            //console.log("line 35", user)
+            if (user) { // if logged in
+                this.user = auth.currentUser // set user to current user)
+                let documents = await getDocs(collection(db, "User"))
+                documents.forEach((docs) => {
+                    let data = docs.data()
+                    if (docs.id === this.user.uid) {
+                      //console.log(data)
+                      this.admin = data.isAdmin
+                      //console.log(this.user);
+                  }
+              })
+            } 
+        })
     },
     methods: {
         async submit() {
