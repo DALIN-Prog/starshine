@@ -2,29 +2,26 @@
     <UserNavBar/>
     <div class="container">
         <div class="row">
-            <h2 id="title" style="text-align:center">{{this.user.uid}}'s Past Data</h2>
-            <router-link class="btn btn-outline-primary btn-lg" to="#" v-on:click="addVitals()">Add Vital Points</router-link>
+            <h2 id="title" style="text-align:center">{{displayname}}'s Past Data</h2>
+            <router-link class="btn btn-outline-primary btn-lg" to="/DataEntry" v-on:click="addVitals()" v-if="admin">Add Vital Points</router-link>
         </div>
     </div>
 
     <div id="histTable">
         <table id="table">
-        <thead>
-            <tr>
-            <th scope="col">Date</th>
-            <th scope="col">Time</th>
-            <th scope="col">Blood Pressure</th>
-            <th scope="col">Temperature</th>
-            <th scope="col">Heart Rate</th>
-            <th scope="col">Respiratory Rate</th>
-            <th scope="col">Image</th>
-            <th scope="col">Created By</th>
-            <th scope="col">Actions</th>
-            </tr>
-        </thead>
-
-        
-        
+            <thead>
+                <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Time</th>
+                <th scope="col">Blood Pressure</th>
+                <th scope="col">Temperature</th>
+                <th scope="col">Heart Rate</th>
+                <th scope="col">Respiratory Rate</th>
+                <th scope="col">Image</th>
+                <th scope="col">Created By</th>
+                <th scope="col">Actions</th>
+                </tr>
+            </thead>
         </table>
     </div>
 
@@ -49,8 +46,9 @@ export default {
 
     data() {
         return {
-            /* fbuser:"", */
+            displayname: "",
             user: false,
+            admin: false,
         }
     },
 
@@ -59,9 +57,20 @@ export default {
 
         this.fbuser = auth.currentUser;
         this.display(this.fbuser.uid);
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                this.user = user;
+        onAuthStateChanged(auth, async user => {
+            if (user) { // if logged in
+                this.user = auth.currentUser // set user to current user)
+                let documents = await getDocs(collection(db, "User"))
+                documents.forEach((docs) => {
+                    let data = docs.data()
+                    //console.log(docs.id)
+                    if (docs.id === this.user.uid) {
+                        //console.log(data)
+                        this.displayname = data.name //this.user.displayName
+                        this.admin = data.isAdmin
+                        //console.log(this.user);
+                    }
+                }) 
             }
         })
     },
