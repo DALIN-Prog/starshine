@@ -19,7 +19,7 @@
             <th scope="col">Respiratory Rate</th>
             <th scope="col">Image</th>
             <th scope="col">Last Updated</th>
-            <th scope="col">Actions</th>
+            <th scope="col" v-if="admin">Actions</th>
             </tr>
         </thead>
     </table>
@@ -90,19 +90,23 @@ export default {
                     rpCell.innerHTML = obj.data().respiratoryRate + " bpm";
                     imgCell.innerHTML = "image";
                     lastCell.innerHTML = obj.data().lastUpdated.toDate().toDateString().slice(4) + " " + obj.data().lastUpdated.toDate().toLocaleTimeString('en-US');
-                    const group = "<div class='btn-group' role='group' aria-label='Basic mixed styles example'>"
-                    const edit = "<button id='edit-" + obj.id + "' type='button' class='btn btn-primary btn-sm'>Edit</button>"
-                    const del = "<button id='del-" + obj.id + "' type='button' class='btn btn-danger btn-sm'>Delete</button></div>"
-                    actionsCell.innerHTML = group + edit + del;
-                    // var btnEdit = document.getElementById("edit-" + obj.id)
-                    var btnDelete = document.getElementById("del-" + obj.id)
                     
-                    // btnEdit.addEventListener("click", () => {
-                    //     editData(obj.id);
-                    // });
-                    btnDelete.addEventListener("click", () => {
-                        this.deleteData(obj.id);
-                    });
+                    if (this.admin) {
+                        const group = "<div class='btn-group' role='group' aria-label='Basic mixed styles example'>"
+                        const edit = "<button id='edit-" + obj.id + "' type='button' class='btn btn-primary btn-sm'>Edit</button>"
+                        const del = "<button id='del-" + obj.id + "' type='button' class='btn btn-danger btn-sm'>Delete</button></div>"
+                        actionsCell.innerHTML = group + edit + del;
+                        // var btnEdit = document.getElementById("edit-" + obj.id)
+                        var btnDelete = document.getElementById("del-" + obj.id)
+                        
+                        // btnEdit.addEventListener("click", () => {
+                        //     editData(obj.id);
+                        // });
+                        btnDelete.addEventListener("click", () => {
+                            this.deleteData(obj.id);
+                        });
+                    }
+                    
                     index++
                 })
             }
