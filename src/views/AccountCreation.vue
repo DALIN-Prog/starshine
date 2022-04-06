@@ -12,7 +12,7 @@
                 <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
 
                 <div class="col-md-6">
-                  <input id="name" type="name" class="form-control" name="name" value required autofocus v-model="form.name"/>
+                  <input id="name" type="name" class="form-control" name="name" required autofocus v-model="form.name"/>
                 </div>
               </div>
 
@@ -50,7 +50,7 @@
 
               <div class="form-group row mb-0">
                 <div class="col-md-8 offset-md-4">
-                  <button type="submit" class="btn btn-primary" v:on-click="submit()">
+                  <button type="submit" class="btn btn-primary">
                     Register
                   </button>
                 </div>
