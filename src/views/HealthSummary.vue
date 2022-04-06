@@ -7,7 +7,7 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Temperature</h5>
-            <p class="card-text text-center fs-3 fw-bold">Value</p>
+            <p class="card-text text-center fs-3 fw-bold">{{temp}}</p>
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal1">
               Learn More
@@ -38,7 +38,7 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Blood Pressure</h5>
-            <p class="card-text text-center fs-3 fw-bold">Value</p>
+            <p class="card-text text-center fs-3 fw-bold">{{bp}}</p>
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal2">
               Learn More
@@ -69,7 +69,7 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Heart Rate</h5>
-            <p class="card-text text-center fs-3 fw-bold">Value</p>
+            <p class="card-text text-center fs-3 fw-bold">{{hr}}</p>
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal3">
               Learn More
@@ -100,7 +100,7 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Respiratory Rate</h5>
-            <p class="card-text text-center fs-3 fw-bold">Value</p>
+            <p class="card-text text-center fs-3 fw-bold">{{rp}}</p>
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal4">
               Learn More
@@ -177,6 +177,10 @@ export default {
       return {
           user:false,
           admin: true,
+          temp: 0,
+          bp: 0,
+          hr: 0,
+          rp: 0
       }
   },
 
@@ -189,10 +193,19 @@ export default {
               documents.forEach((docs) => {
                   let data = docs.data()
                   if (docs.id === this.user.uid) {
-                      //console.log(data)
                       this.admin = data.isAdmin
-                      //console.log(this.user);
                   }
+              })
+              let vitalPoint = await getDocs(collection(db, "VitalPoint"))
+              let latest = 0
+              vitalPoint.forEach((docs) => {
+                if (docs.data().created > latest && docs.data().residentID === this.user.uid) {
+                  latest = docs.data().created
+                  this.temp = docs.data().temperature + " ℃"
+                  this.hr = docs.data().heartRate + " bpm"
+                  this.bp = docs.data().bloodPressure + " mm Hg"
+                  this.rp = docs.data().respiratoryRate + " bpm"
+                }
               })
           }
       })

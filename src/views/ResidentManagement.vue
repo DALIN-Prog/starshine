@@ -7,7 +7,7 @@
                 <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Appointments</h5>
-                    <p class="card-text text-center fs-3 fw-bold">Value</p>
+                    <p class="card-text text-center fs-3 fw-bold">{{totalAppt}}</p>
                 </div>
                 </div>
             </div>
@@ -15,7 +15,7 @@
                 <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Residents</h5>
-                    <p class="card-text text-center fs-3 fw-bold">Value</p>
+                    <p class="card-text text-center fs-3 fw-bold">{{totalRes}}</p>
                 </div>
                 </div>
             </div>
@@ -23,17 +23,15 @@
     </div>
 
     <div class="resTable">
-        <table class="table table-striped table-sm">
+        <table class="table" id="table">
         <thead>
             <tr>
+            <th scope="col">No.</th>
             <th scope="col">Name</th>
             <th scope="col">Phone No.</th>
-            <th scope="col">Blood Pressure</th>
-            <th scope="col">Heart Rate</th>
             <th scope="col">Floor-Room Bed</th>
             <th scope="col">Conditions</th>
             <th scope="col">Admitted</th>
-            <th scope="col">Updated At</th>
             <th scope="col">Actions</th>
             </tr>
         </thead>
@@ -44,7 +42,10 @@
 </template>
 
 <script>
+import firebaseApp from '@/firebase.js';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { collection, getDocs, getFirestore } from "firebase/firestore";
+const db = getFirestore(firebaseApp);
 import UserNavBar from '@/components/UserNavBar.vue'
 
 export default {
@@ -55,17 +56,61 @@ export default {
 
     data () {
         return {
-            user:false,
+            user: false,
+            totalAppt: 0,
+            totalRes: 0,
+            userArr: []
         }
     },
 
     mounted () {
         const auth = getAuth();
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, async user => {
             if (user) {
-                this.user = user;
+                this.user = auth.currentUser // set user to current user)
+                let documents = await getDocs(collection(db, "User"))
+                documents.forEach((docs) => {
+                    if (!docs.data().isAdmin) {
+                        this.userArr.push(docs)
+                        this.totalRes++;
+                    }
+                })
+                let index = 1
+                this.userArr.sort(this.compareName)
+                this.userArr.forEach((obj) => {
+                    var table = document.getElementById("table")
+                    var row = table.insertRow(index)
+                    var indexCell = row.insertCell(0); var nameCell = row.insertCell(1); var phoneCell = row.insertCell(2); 
+                    var bedCell = row.insertCell(3); var condiCell = row.insertCell(4); var admitCell = row.insertCell(5); 
+                    var actionsCell = row.insertCell(6);
+                    indexCell.innerHTML = index;
+                    nameCell.innerHTML = obj.data().name
+                    phoneCell.innerHTML = obj.data().phone
+                    bedCell.innerHTML = obj.data().bedNumber;
+                    condiCell.innerHTML = "condition" //obj.data().condition;
+                    admitCell.innerHTML = obj.data().createdAt.toDate().toDateString().slice(4) + " " + obj.data().createdAt.toDate().toLocaleTimeString('en-US');
+                    const edit = "<button id='view-" + obj.id + "' type='button' class='btn btn-primary btn-sm'>View</button>"
+                    actionsCell.innerHTML = edit;
+                    var btnView = document.getElementById("view-" + obj.id)
+                    btnView.addEventListener("click", () => {
+                        this.viewData(obj.id);
+                    });
+                    index++
+                })
+
             }
+
         })
+    },
+    methods: {
+        compareName: function (a, b) {
+            if(a.data().name < b.data().name) { return -1; }
+            if(a.data().name > b.data().name) { return 1; }
+            return 0;
+        },
+        viewData: function () {
+
+        }
     }
 }
 </script>
