@@ -1,5 +1,5 @@
 <template>
-<div id="main">
+<div id="main" class="ml-4">
   <h1>Appointment</h1>
   <div id="div1">
     <h4>Please select a date of visit:</h4>
@@ -40,8 +40,9 @@
 
 <script>
 import firebaseApp from '../firebase.js'
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {getFirestore} from "firebase/firestore"
-import {doc, setDoc} from "firebase/firestore"
+import {doc, setDoc, updateDoc} from "firebase/firestore"
 import {collection, getDocs} from "firebase/firestore"
 
 const db = getFirestore(firebaseApp)
@@ -49,18 +50,18 @@ const db = getFirestore(firebaseApp)
 export default {
     data() {
         return {
-            enter:''
+            enter:'',
+            user: false,
+            username:""
         };
     },
     methods:{
-        search(){
+        search: function(){
             console.log(document.getElementById("date1").value)
             this.enter=document.getElementById("date1").value // 2022-04-11
 
-        }
-    },
-    mounted(){
-        async function getSlots() {
+        },
+        getSlots: async function () {
             let a = await getDocs(collection(db, "Appointment"))
             let ind = 1
             a.forEach((docs) => {
@@ -73,14 +74,9 @@ export default {
                 var end = (yy.endtime)
                 var name = (yy.name)
 
-                if(date===this.enter && name!=='visitor') {
+                if (name==="NA") { // if the date >= now && name === "NA"
 
                 var row = table.insertRow(ind)
-
-                console.log(id)
-                console.log(date)
-                console.log(start)
-                console.log(end)
 
                 var cell1 = row.insertCell(0)
                 var cell2 = row.insertCell(1)
@@ -98,26 +94,22 @@ export default {
                 var bu = document.createElement("button")
                 bu.className="bwt"
                 bu.innerHTML="Book"
-                bu.onclick = function(){
-                    book(id)
-                    refresh()
-                }
+                bu.addEventListener("click", () => {
+                    this.book(id);
+                    this.refresh()
+                });
                 cell6.appendChild(bu)
                 ind+=1
                 }
             })
-        }
-        getSlots()
-
-        async function book(id) {
-            var a = id
+        },
+        book: async function(id) {
             alert("You are going to make an appointment")
-            const app = doc(db, 'Appointment', a);
-            setDoc(app, { name: "visitor" }, { merge: true });
-
-        }
-
-        async function mySlots(){
+            await updateDoc(doc(db, "Appointment", id), {
+                name: this.username
+            });
+        },
+        mySlots: async function () {
             let a = await getDocs(collection(db, "Appointment"))
             let ind = 1
             a.forEach((docs) => {
@@ -130,14 +122,9 @@ export default {
                 var end = (yy.endtime)
                 var name = (yy.name)
 
-                if(name=='visitor') {
+                if(name=== this.username) {
 
                 var row = table.insertRow(ind)
-
-                console.log(id)
-                console.log(date)
-                console.log(start)
-                console.log(end)
 
                 var cell1 = row.insertCell(0)
                 var cell2 = row.insertCell(1)
@@ -158,25 +145,22 @@ export default {
                 bu.className="bwt"
                 bu.innerHTML="Cancel"
                 bu.onclick = function(){
-                    cancel(id)
-                    refresh()
+                    this.cancel(id)
+                    this.refresh()
                 }
                 cell7.appendChild(bu)
                 ind+=1
                 }
             })
-        }
-        mySlots()
-
-        async function cancel(id) {
+        },
+        cancel: async function (id) {
             var a = id
             alert("You are going to cancel the appointment")
             const app = doc(db, 'Appointment', a);
             setDoc(app, { name: "NA" }, { merge: true });
 
-        }
-
-        function refresh(){
+        },
+        refresh: function refresh(){
             let tb = document.getElementById("table")
             while(tb.rows.length>1){
                 tb.deleteRow(1)
@@ -185,9 +169,27 @@ export default {
             while(tb1.rows.length>1){
                 tb1.deleteRow(1)
             }
-            getSlots()
-            mySlots()
+            this.getSlots()
+            this.mySlots()
         }
+    },
+    mounted(){
+        const auth = getAuth();
+        onAuthStateChanged(auth, async user => {
+          if (user) {
+            this.user = auth.currentUser // set user to current user)
+            let documents = await getDocs(collection(db, "User"))
+            documents.forEach((docs) => {
+                let data = docs.data()
+                if (docs.id === this.user.uid) {
+                    this.username = data.name
+                    //console.log(this.username)
+                }
+            })
+            this.getSlots()
+            this.mySlots()
+          }
+        })
     }
 
 }
