@@ -7,13 +7,13 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Temperature</h5>
-            <p class="card-text text-center fs-3 fw-bold">Value</p>
+            <p class="card-text text-center fs-3 fw-bold">{{temp}}</p>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal1">
               Learn More
             </button>
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -21,8 +21,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Body temperatures is an early warning sign of infection. <br>
+                    A <strong>normal</strong> healthy temperature ranges from <strong>36.1℃</strong>to <strong>37.2℃</strong>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -38,13 +38,13 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Blood Pressure</h5>
-            <p class="card-text text-center fs-3 fw-bold">Value</p>
+            <p class="card-text text-center fs-3 fw-bold">{{bp}}</p>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal2">
               Learn More
             </button>
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -52,8 +52,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Blood pressure is vital because it delivers white blood cells and antibodies for immunity and hormones such as insulin. <br>
+                    Men and women who are <strong>65 or older</strong> should aim for a blood pressure l<strong>ower than 130/80 mm Hg</strong>.
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -69,13 +69,13 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Heart Rate</h5>
-            <p class="card-text text-center fs-3 fw-bold">Value</p>
+            <p class="card-text text-center fs-3 fw-bold">{{hr}}</p>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal3">
               Learn More
             </button>
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -83,8 +83,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    The heart circulates oxygen and nutrient-rich blood throughout the body. When it's not working properly, just about everything is affected. <br>
+                    A <strong>normal</strong> heart rate for seniors is between <strong>60 and 100 beats per minute</strong>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -100,13 +100,13 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Respiratory Rate</h5>
-            <p class="card-text text-center fs-3 fw-bold">Value</p>
+            <p class="card-text text-center fs-3 fw-bold">{{rp}}</p>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal4">
               Learn More
             </button>
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -114,8 +114,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Respiratory rate is a fundamental vital sign that is sensitive to different pathological conditions. <br>
+                    The <strong>normal</strong> respiratory rate for elderly individuals living independently is <strong>12-18 breaths per minute</strong> while it is <strong>16-25 breaths per minute</strong> for those needing long term care.
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -154,7 +154,7 @@
         <line-chart :data="{'2022-05-13': 2, '2022-05-14': 5}" :download="true"></line-chart>
         <router-link type="button" class="btn btn-outline-primary btn-lg hist" to="/HistoricalData">View Historical Data</router-link>
 
-        <router-link type= "button" class="btn btn-outline-primary btn-lg add" to="#">Add Vital Points</router-link> <!-- only for admin -->
+        <router-link type= "button" class="btn btn-outline-primary btn-lg add" to="/DataEntry" v-if="admin">Add Vital Points</router-link> <!-- only for admin -->
       </div>
     </div>
   </div>
@@ -162,7 +162,10 @@
 </template>
 
 <script>
+import firebaseApp from '@/firebase.js';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { collection, getDocs, getFirestore } from "firebase/firestore";
+const db = getFirestore(firebaseApp);
 import UserNavBar from '@/components/UserNavBar.vue'
 
 export default {
@@ -170,18 +173,40 @@ export default {
   components: {
     UserNavBar
   },
-  
   data () {
       return {
           user:false,
+          admin: true,
+          temp: 0,
+          bp: 0,
+          hr: 0,
+          rp: 0
       }
   },
 
   mounted () {
       const auth = getAuth();
-      onAuthStateChanged(auth, (user) => {
+      onAuthStateChanged(auth, async user => {
           if (user) {
-              this.user = user;
+              this.user = auth.currentUser // set user to current user)
+              let documents = await getDocs(collection(db, "User"))
+              documents.forEach((docs) => {
+                  let data = docs.data()
+                  if (docs.id === this.user.uid) {
+                      this.admin = data.isAdmin
+                  }
+              })
+              let vitalPoint = await getDocs(collection(db, "VitalPoint"))
+              let latest = 0
+              vitalPoint.forEach((docs) => {
+                if (docs.data().created > latest && docs.data().residentID === this.user.uid) {
+                  latest = docs.data().created
+                  this.temp = docs.data().temperature + " ℃"
+                  this.hr = docs.data().heartRate + " bpm"
+                  this.bp = docs.data().bloodPressure + " mm Hg"
+                  this.rp = docs.data().respiratoryRate + " bpm"
+                }
+              })
           }
       })
   }

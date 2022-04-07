@@ -47,21 +47,25 @@
               <router-link to="/" class="nav-link">Home</router-link>
             </li>
             <li class="nav-item" v-if="!user">
-              <router-link to="#" class="nav-link">Contact</router-link>
+              <router-link to="/ContactUs" class="nav-link">Contact</router-link>
             </li>
-            <li class="nav-item" v-if="user">
+            <li class="nav-item" v-if="user && admin">
+              <router-link to="/ResidentManagement" class="nav-link">Manage</router-link>
+            </li>
+            <li class="nav-item" v-if="user && !admin">
               <router-link to="/HealthSummary" class="nav-link">Dashboard</router-link>
             </li>
             <li class="nav-item" v-if="user">
-              <router-link to="#" class="nav-link">Appointment</router-link>
+              <router-link to="/Appointment" class="nav-link">Appointment</router-link>
             </li>
             <li class="nav-item dropdown" v-if="user">
               <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Profile
               </a>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><router-link to="#" class="dropdown-item">Contact</router-link></li>
+                <li v-if="!admin"><router-link class="dropdown-item" to="/HistoricalData">Historical Data</router-link></li>
+                <li v-if="admin"><router-link class="dropdown-item" to="/AccountCreation">Create Account</router-link></li>
+                <li><router-link to="/ContactUs" class="dropdown-item">Contact</router-link></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="#" @click="logOut()">Logout</a></li>
               </ul>
@@ -78,14 +82,17 @@
 </template>
 
 <script>
+import firebaseApp from '@/firebase.js';
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth"
+import { collection, getDocs, getFirestore } from "firebase/firestore";
+const db = getFirestore(firebaseApp);
+
 export default {
   name: "UserNavBar",
-  methods: {},
-};
   data() {
     return {
-      user: false
+      user: false,
+      admin: false
     }
   },
   methods: {
@@ -100,13 +107,27 @@ export default {
   },
   mounted() {
     const auth = getAuth();
-    onAuthStateChanged(auth, user => {
-      this.user = user;
+    onAuthStateChanged(auth, async user => {
+      if (user) {
+        this.user = auth.currentUser // set user to current user)
+        let documents = await getDocs(collection(db, "User"))
+        documents.forEach((docs) => {
+        let data = docs.data()
+        if (docs.id === this.user.uid) {
+            //console.log(data)
+            this.admin = data.isAdmin
+            //console.log(this.user);
+        }
       })
+      }
+    })
   },
 
     
 }
+
+
+    
 </script>
 
 <style scoped>

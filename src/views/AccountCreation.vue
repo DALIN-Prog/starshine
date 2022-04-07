@@ -14,16 +14,7 @@
                 >
 
                 <div class="col-md-6">
-                  <input
-                    id="name"
-                    type="name"
-                    class="form-control"
-                    name="name"
-                    value
-                    required
-                    autofocus
-                    v-model="form.name"
-                  />
+                  <input id="name" type="name" class="form-control" name="name" required autofocus v-model="form.name"/>
                 </div>
               </div>
 

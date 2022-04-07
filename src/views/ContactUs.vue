@@ -1,8 +1,8 @@
 <template>
-  <div id="nav"></div>
+  <UserNavBar />
   <div id="InsidePicture">
-  <h1 id="header">Contact Us</h1>
-  <h2 id="name">Starshine Nursing Home</h2>
+  <h1 id="header" class="mt-4">Contact Us</h1>
+  <h2 id="name" class="mb-4">Starshine Nursing Home</h2>
   <div id="space"></div>
   </div>
   <div id="left">
@@ -38,15 +38,17 @@
 </template>
 
 <script>
+import UserNavBar from "../components/UserNavBar.vue";
 export default {
+    name: "ContactUs",
+    components: {
+    UserNavBar,
+  },
 
 }
 </script>
 
 <style>
-#nav{
-    height: 60px;
-}
 #header{
     text-align: center;
     margin-right: 5%;
