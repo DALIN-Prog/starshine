@@ -9,7 +9,9 @@
             <div v-if="error" class="alert alert-danger">{{ error }}</div>
             <form action="#" @submit.prevent="submit">
               <div class="form-group row">
-                <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
+                <label for="name" class="col-md-4 col-form-label text-md-right"
+                  >Name</label
+                >
 
                 <div class="col-md-6">
                   <input id="name" type="name" class="form-control" name="name" required autofocus v-model="form.name"/>
@@ -17,34 +19,79 @@
               </div>
 
               <div class="form-group row">
-                <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
+                <label for="email" class="col-md-4 col-form-label text-md-right"
+                  >Email</label
+                >
 
                 <div class="col-md-6">
-                  <input id="email" type="email" class="form-control" name="email" required autofocus v-model="form.email"/>
+                  <input
+                    id="email"
+                    type="email"
+                    class="form-control"
+                    name="email"
+                    required
+                    autofocus
+                    v-model="form.email"
+                  />
                 </div>
               </div>
 
               <div class="form-group row">
-                <label for="password" class="col-md-4 col-form-label text-md-right" >Password</label>
+                <label
+                  for="password"
+                  class="col-md-4 col-form-label text-md-right"
+                  >Password</label
+                >
 
                 <div class="col-md-6">
-                  <input id="password" type="password" class="form-control" name="password" required v-model="form.password" />
+                  <input
+                    id="password"
+                    type="password"
+                    class="form-control"
+                    name="password"
+                    required
+                    v-model="form.password"
+                  />
                 </div>
               </div>
 
               <div class="form-group row">
-                <label for="contact" class="col-md-4 col-form-label text-md-right" >Contact</label>
+                <label
+                  for="contact"
+                  class="col-md-4 col-form-label text-md-right"
+                  >Contact</label
+                >
 
                 <div class="col-md-6">
-                  <input id="contact" type="contact" class="form-control" name="contact" required autofocus v-model="form.contact" />
+                  <input
+                    id="contact"
+                    type="contact"
+                    class="form-control"
+                    name="contact"
+                    required
+                    autofocus
+                    v-model="form.contact"
+                  />
                 </div>
               </div>
 
               <div class="form-group row">
-                <label for="BedNumber" class="col-md-4 col-form-label text-md-right">Bed Number</label>
+                <label
+                  for="BedNumber"
+                  class="col-md-4 col-form-label text-md-right"
+                  >Bed Number</label
+                >
 
                 <div class="col-md-6">
-                  <input id="Bed Number" type="Bed Number" class="form-control" name="Bed Number" required autofocus v-model="form.BedNumber"/>
+                  <input
+                    id="Bed Number"
+                    type="Bed Number"
+                    class="form-control"
+                    name="Bed Number"
+                    required
+                    autofocus
+                    v-model="form.BedNumber"
+                  />
                 </div>
               </div>
 
@@ -146,21 +193,21 @@ export default {
 </script>
 
 <style scoped>
-  .container {
-    position: relative;
-    top: 50%;
-    transform: translateY(50%);
-    width: 1000px;
-    border-color: black;
-    border-width: 1px;
-  }
-  .card-header {
-    background-color: #292b2c;
-    color: azure;
-  }
-  .form-control {
-    margin-bottom: 10px;
-    border-color: #292b2c;
-    border-width: 1px;
-  }
+.container {
+  position: relative;
+  top: 50%;
+  transform: translateY(50%);
+  width: 1000px;
+  border-color: black;
+  border-width: 1px;
+}
+.card-header {
+  background-color: #292b2c;
+  color: azure;
+}
+.form-control {
+  margin-bottom: 10px;
+  border-color: #292b2c;
+  border-width: 1px;
+}
 </style>
