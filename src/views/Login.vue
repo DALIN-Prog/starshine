@@ -38,6 +38,7 @@
                   <button type="submit" class="btn btn-primary" v-on:click="submit">
                     Login
                   </button>
+                  <router-link class="btn btn-outline-info ms-2" to="/AccountCreation">Register</router-link>
                 </div>
               </div>
             </form>

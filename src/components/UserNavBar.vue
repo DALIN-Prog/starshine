@@ -28,7 +28,6 @@
               </a>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <li v-if="!admin"><router-link class="dropdown-item" to="/HistoricalData">Historical Data</router-link></li>
-                <li v-if="admin"><router-link class="dropdown-item" to="/AccountCreation">Create Account</router-link></li>
                 <li><router-link to="/ContactUs" class="dropdown-item">Contact</router-link></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="#" @click="logOut()">Logout</a></li>
@@ -63,6 +62,8 @@ export default {
       const auth = getAuth();
       const user = auth.currentUser
       signOut(auth, user)
+      this.admin = false
+      this.user = false
       this.$router.push({
         name: "LandingPage"
       })

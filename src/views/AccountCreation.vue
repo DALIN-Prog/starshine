@@ -5,17 +5,13 @@
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
 
-  <div v-if="success" class="alert alert-success">
-    {{ success }}
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
   <div class="container">
         <div class="row">
             <h2 class="title mt-5 mb-4">Account Creation</h2>
         </div>
     </div>
 
-  <div class="container">
+  <div class="container" v-if="!user">
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div class="card">
@@ -76,6 +72,9 @@
                   <button type="submit" class="btn btn-primary">
                     Register
                   </button>
+                  <router-link class="btn btn-secondary ms-2" to="/login">
+                    Back
+                  </router-link>
                 </div>
               </div>
             </form>
@@ -110,8 +109,8 @@ export default {
         condition: "",
         bedNumber: "",
       },
+      user: false,
       error: null,
-      success: null,
     };
   },
   methods: {
@@ -135,6 +134,7 @@ export default {
           createdAt: serverTimestamp()
         }).then(() => {
           this.success = "User created successfully! Refresh the page to create another user."
+          this.$router.push("/")
         }).catch(err => {
           this.error = err.message
         })
