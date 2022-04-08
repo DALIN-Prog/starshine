@@ -89,7 +89,7 @@ export default {
                     bedCell.innerHTML = obj.data().bedNumber;
                     condiCell.innerHTML = "condition" //obj.data().condition;
                     admitCell.innerHTML = obj.data().createdAt.toDate().toDateString().slice(4) + " " + obj.data().createdAt.toDate().toLocaleTimeString('en-US');
-                    const edit = "<button id='view-" + obj.id + "' type='button' class='btn btn-primary btn-sm'>View</button>"
+                    const edit = "<router-link id='view-" + obj.id + "' type='button' class='btn btn-primary btn-sm'>View</button>"
                     actionsCell.innerHTML = edit;
                     var btnView = document.getElementById("view-" + obj.id)
                     btnView.addEventListener("click", () => {
@@ -108,8 +108,8 @@ export default {
             if(a.data().name > b.data().name) { return 1; }
             return 0;
         },
-        viewData: function () {
-
+        viewData: function (id) {
+            this.$router.push("/HealthSummary/" + id)
         }
     }
 }

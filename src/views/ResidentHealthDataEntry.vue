@@ -41,7 +41,7 @@
             <div class="col-4"></div>
             <div class="mb-3 col-4">
                 <label for="formFile" class="form-label">Elderly Image</label>
-                <input class="form-control" type="file" id="formFile">
+                <input class="form-control" type="file" id="formFile" accept=".png, .jpg, .jpeg">
             </div>
         </div>
         

@@ -177,6 +177,7 @@ export default {
       return {
           user:false,
           admin: true,
+          id: this.$route.params.id,
           temp: 0,
           bp: 0,
           hr: 0,
@@ -193,13 +194,15 @@ export default {
               documents.forEach((docs) => {
                   let data = docs.data()
                   if (docs.id === this.user.uid) {
-                      this.admin = data.isAdmin
+                    this.admin = data.isAdmin
+                  } else if (this.id === docs.id) {
+                    this.admin = true
                   }
               })
               let vitalPoint = await getDocs(collection(db, "VitalPoint"))
               let latest = 0
               vitalPoint.forEach((docs) => {
-                if (docs.data().created > latest && docs.data().residentID === this.user.uid) {
+                if (docs.data().created > latest && (docs.data().residentID === this.user.uid || docs.data().residentID == this.id)) {
                   latest = docs.data().created
                   this.temp = docs.data().temperature + " ℃"
                   this.hr = docs.data().heartRate + " bpm"

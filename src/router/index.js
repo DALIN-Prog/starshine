@@ -3,6 +3,7 @@ import LandingPage from "../views/LandingPage.vue";
 import Login from "../views/Login.vue";
 import AccountCreation from "../views/AccountCreation.vue";
 import HealthSum from "../views/HealthSummary.vue";
+import HealthSumView from "../views/HealthSummary.vue";
 import ResMgmt from "../views/ResidentManagement.vue";
 import HistoricalData from "../views/HistoricalData.vue";
 import ContactUs from "../views/ContactUs.vue";
@@ -29,6 +30,11 @@ const routes = [
     path: "/HealthSummary",
     name: "HealthSummary",
     component: HealthSum,
+  },
+  {
+    path: "/HealthSummary/:id",
+    name: "HealthSummaryView",
+    component: HealthSumView,
   },
   {
     path: "/ResidentManagement",

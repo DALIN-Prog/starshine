@@ -10,19 +10,19 @@
             <li class="nav-item">
               <router-link to="/" class="nav-link">Home</router-link>
             </li>
-            <li class="nav-item" v-if="!user">
+            <li class="nav-item" v-show="!user">
               <router-link to="/ContactUs" class="nav-link">Contact</router-link>
             </li>
-            <li class="nav-item" v-if="user && admin">
+            <li class="nav-item" v-show="user && admin">
               <router-link to="/ResidentManagement" class="nav-link">Manage</router-link>
             </li>
-            <li class="nav-item" v-if="user && !admin">
+            <li class="nav-item" v-show="user && !admin">
               <router-link to="/HealthSummary" class="nav-link">Dashboard</router-link>
             </li>
-            <li class="nav-item" v-if="user">
+            <li class="nav-item" v-show="user">
               <router-link to="/Appointment" class="nav-link">Appointment</router-link>
             </li>
-            <li class="nav-item dropdown" v-if="user">
+            <li class="nav-item dropdown" v-show="user">
               <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Profile
               </a>
@@ -33,7 +33,7 @@
                 <li><a class="dropdown-item" href="#" @click="logOut()">Logout</a></li>
               </ul>
             </li>
-            <li class="nav-item" v-else>
+            <li class="nav-item" v-show="!user">
               <router-link to="/login" class="nav-link">Login</router-link>
             </li>
           </ul>
