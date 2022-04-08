@@ -8,8 +8,18 @@ import HistoricalData from "../views/HistoricalData.vue";
 import ContactUs from "../views/ContactUs.vue";
 import Appointment from "../views/Slots.vue";
 import ResidentHealthDataEntry from "../views/ResidentHealthDataEntry.vue";
+import ProfilePage from "../views/ProfilePage.vue";
+
+//test
+//import ImageUploader from "@/components/ImageUploader.vue";
+//test
 
 const routes = [
+  /*{
+    path: "/ImageUploader",
+    name: "ImageUploader",
+    component: ImageUploader,
+  },*/
   {
     path: "/",
     name: "LandingPage",
@@ -59,6 +69,11 @@ const routes = [
     path: "/DataEntry",
     name: "ResidentHealthDataEntry",
     component: ResidentHealthDataEntry,
+  },
+  {
+    path: "/ProfilePage",
+    name: "ProfilePage",
+    component: ProfilePage,
   },
 ];
 
