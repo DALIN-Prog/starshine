@@ -1,7 +1,7 @@
 <template>
     <UserNavBar/>
     <div id="about">
-        <h1><u>{{this.welcomeMessage}}</u></h1>
+        <h1>{{this.welcomeMessage}}</h1>
         
         <img src="@/assets/landing.jpg" id="pic">
         <h4 id="intro">
@@ -14,11 +14,10 @@
 
 <script>
 import UserNavBar from "../components/UserNavBar.vue"
-<<<<<<< HEAD
-
-=======
 import { getAuth, onAuthStateChanged } from "firebase/auth";
->>>>>>> 474f46c844af18814f7e052953c1c42ae14f5c88
+import firebaseApp from "../firebase.js"
+import { getFirestore, collection, getDocs } from "firebase/firestore"
+const db = getFirestore(firebaseApp)
 export default {
     name: "LandingPage",
     components: {
@@ -35,12 +34,20 @@ export default {
     },
     mounted() {
         const auth = getAuth();
-        onAuthStateChanged(auth, user => {
-            console.log("line 35", user)
+        onAuthStateChanged(auth, async user => {
+            //console.log("line 35", user)
             if (user) { // if logged in
-                this.user = auth.currentUser // set user to current user
-                this.welcomeMessage = "Welcome " + this.user.uid //this.user.displayName
-                console.log(this.user.displayName);
+                this.user = auth.currentUser // set user to current user)
+                let documents = await getDocs(collection(db, "User"))
+                documents.forEach((docs) => {
+                    let data = docs.data()
+                    //console.log(docs.id)
+                    if (docs.id === this.user.uid) {
+                        console.log(data)
+                        this.welcomeMessage = "Welcome " + data.name //this.user.displayName
+                        //console.log(this.user);
+                    }
+                }) 
             } else { // if not logged in, default message will be 'About us'
                 this.welcomeMessage = "About us"
                 console.log("AboutUs line 30")
@@ -52,10 +59,6 @@ export default {
 </script>
 
 <style scoped>
-    h1 {
-        margin-top: 56px;
-    }
-
     body {
         background-color: #EFF6F8;
     }

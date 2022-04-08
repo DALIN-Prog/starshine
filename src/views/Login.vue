@@ -38,6 +38,7 @@
                   <button type="submit" class="btn btn-primary" v-on:click="submit">
                     Login
                   </button>
+                  <router-link class="btn btn-outline-info ms-2" to="/AccountCreation">Register</router-link>
                 </div>
               </div>
             </form>
@@ -45,7 +46,6 @@
         </div>
       </div>
     </div>
-    <!--div id="firebaseui-auth-container"></div-->
   </div>
 </template>
 
@@ -89,12 +89,12 @@ export default {
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Sacramento&display=swap');
 
-    .title {
-        text-align: center;
-        font-family: Merriweather;
-    }
+.title {
+    text-align: center;
+    font-family: Merriweather;
+}
 
-   h1 {
-        margin-top: 56px;
-    }
+h1 {
+    margin-top: 56px;
+}
 </style>
