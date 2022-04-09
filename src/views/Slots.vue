@@ -1,5 +1,6 @@
 <template>
 <UserNavBar/>
+<h1>{{this.username}}</h1>
 <div id="main" class="ml-4">
   <h1>Make an appointment to visit our residents</h1>
   <div id="div2">
@@ -58,7 +59,7 @@ export default {
                 let yy = docs.data()
                 var table = document.getElementById("table")
 
-                var id = (yy.id)
+                var id = (docs.id)
                 var date = (yy.date)
                 var start = (yy.starttime)
                 var end = (yy.endtime)
@@ -114,7 +115,7 @@ export default {
                 let yy = docs.data()
                 var table = document.getElementById("table1")
 
-                var id = (yy.id)
+                var id = (docs.id)
                 var date = (yy.date)
                 var start = (yy.starttime)
                 var end = (yy.endtime)

@@ -31,7 +31,7 @@
 import firebaseApp from '../firebase.js'
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {getFirestore} from "firebase/firestore"
-import {doc, setDoc, updateDoc} from "firebase/firestore"
+import {doc, addDoc, updateDoc} from "firebase/firestore"
 import {collection, getDocs} from "firebase/firestore"
 import UserNavBar from '@/components/UserNavBar.vue'
 const db = getFirestore(firebaseApp)
@@ -112,7 +112,7 @@ export default {
         },
         generateSlots: async function(){
             var date1 = document.getElementById("date1").value
-            alert("You are going to generate bisiting slots in " + date1)
+            alert("You are going to generate visiting slots in " + date1)
 
             var start1 = "10:00"
             var end1 = "12:00"
@@ -123,51 +123,51 @@ export default {
             var start4 = "16:00"
             var end4 = "18:00"
             
-            const docRef = doc(collection(db, "Appointment"));
+            const docRef = collection(db, "Appointment");
 
-            const slot1 = await setDoc(docRef, {
+            const slot1 = await addDoc(docRef, {
                 name:"NA",
                 starttime:start1,
                 endtime:end1,
                 date:date1,
             })
             console.log(slot1.id)
-            await updateDoc(doc(db, "Appointment", slot1.id), {
-                id: slot1.id
-            });
+            // await updateDoc(doc(db, "Appointment", slot1.id), {
+            //     id: slot1.id
+            // });
 
-            const slot2 = await setDoc(docRef, {
+            const slot2 = await addDoc(docRef, {
                 name:"NA",
                 starttime:start2,
                 endtime:end2,
                 date:date1,
             })
             console.log(slot2.id)
-            await updateDoc(doc(db, "Appointment", slot2.id), {
-                id: slot2.id
-            });
+            // await updateDoc(doc(db, "Appointment", slot2.id), {
+            //     id: slot2.id
+            // });
 
-            const slot3 = await setDoc(docRef, {
+            const slot3 = await addDoc(docRef, {
                 name:"NA",
                 starttime:start3,
                 endtime:end3,
                 date:date1,
             })
             console.log(slot3.id)
-            await updateDoc(doc(db, "Appointment", slot3.id), {
-                id: slot3.id
-            });
+            // await updateDoc(doc(db, "Appointment", slot3.id), {
+            //     id: slot3.id
+            // });
 
-            const slot4 = await setDoc(docRef, {
+            const slot4 = await addDoc(docRef, {
                 name:"NA",
                 starttime:start4,
                 endtime:end4,
                 date:date1,
             })
             console.log(slot4.id)
-            await updateDoc(doc(db, "Appointment", slot4.id), {
-                id: slot4.id
-            });
+            // await updateDoc(doc(db, "Appointment", slot4.id), {
+            //     id: slot4.id
+            // });
         }
     },
     mounted(){
