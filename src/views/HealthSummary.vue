@@ -146,18 +146,32 @@
         </div>
       </div>
       <div class="col-sm-8 border chart">
-        <div class="dropdown graphSelector">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-            Temperature
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" href="#">Temperature</a></li>
-            <li><a class="dropdown-item" href="#">Blood Pressure</a></li>
-            <li><a class="dropdown-item" href="#">Heart Rate</a></li>
-            <li><a class="dropdown-item" href="#">Respiratory Rate</a></li>
-          </ul>
+        <select class="form-select mt-4 mb-4" v-model="val">
+            <option value="">Please select one </option>
+            <option>Temperature</option>
+            <option>Blood Pressure</option>
+            <option>Heart Rate</option>
+            <option>Respiratory Rate</option>
+        </select>
+          <!-- <select class="form-select mt-4 mb-4" aria-label="Default select example" v-model="val">
+            <option selected>Open this select menu</option>
+            <option value="1">Temperature</option>
+            <option value="2">Blood Pressure</option>
+            <option value="3">Heart Rate</option>
+            <option value="4">Respiratory Rate</option>
+          </select> -->
+        <div v-if= "val === 'Temperature'">
+            <line-chart :data="{'2022-05-13': 2, '2022-05-14': 5}" :download="true"></line-chart>
         </div>
-        <line-chart :data="{'2022-05-13': 2, '2022-05-14': 5}" :download="true"></line-chart>
+        <div v-if= "val === 'Blood Pressure'">
+            <line-chart :data="{'2022-07-13': 2, '2022-07-14': 5}" :download="true"></line-chart>
+        </div>
+        <div v-if= "val === 'Heart Rate'">
+            <line-chart :data="{'2022-05-13': 2, '2022-05-14': 5}" :download="true"></line-chart>
+        </div>
+        <div v-if= "val === 'Respiratory Rate'">
+            <line-chart :data="{'2022-05-13': 2, '2022-05-14': 5}" :download="true"></line-chart>
+        </div>
         <router-link type="button" class="btn btn-outline-primary btn-lg hist" :to="this.historical">View Historical Data</router-link>
         <router-link type= "button" class="btn btn-outline-primary btn-lg add" :to="this.dataentry" v-if="admin">Add Vital Points</router-link> <!-- only for admin -->
       </div>
@@ -191,7 +205,12 @@ export default {
           temp: 0,
           bp: 0,
           hr: 0,
-          rp: 0
+          rp: 0,
+          val:"",
+          chartVal: [{
+            date: "",
+            reading: ""
+          }]
       }
   },
 
