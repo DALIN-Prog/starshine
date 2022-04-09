@@ -7,6 +7,7 @@ import ResManagement from "../views/ResidentManagement.vue";
 import HistoricalData from "../views/HistoricalData.vue";
 import ContactUs from "../views/ContactUs.vue";
 import Appointment from "../views/Slots.vue";
+import AdminAppointment from "../views/AdminSlots.vue";
 import ResidentHealthDataEntry from "../views/ResidentHealthDataEntry.vue";
 import EditData from "../views/EditData.vue";
 
@@ -60,6 +61,11 @@ const routes = [
     path: "/DataEntry/:id",
     name: "ResidentHealthDataEntry",
     component: ResidentHealthDataEntry,
+  },
+  {
+    path: "/AdminSlots",
+    name: "AdminAppointmentPage",
+    component: AdminAppointment,
   },
   {
     path: "/EditData/:id",

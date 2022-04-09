@@ -16,7 +16,7 @@
               <router-link to="/ResidentManagement" class="nav-link" v-if="user">Manage</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/Appointment" class="nav-link" v-if="user">Appointment</router-link>
+              <router-link to="/AdminSlots" class="nav-link" v-if="user">Appointment</router-link>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-if="user">

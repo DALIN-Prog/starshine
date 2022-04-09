@@ -1,22 +1,17 @@
 <template>
-<ClientNavBar/>
+<AdminNavBar/>
 <div id="main" class="ml-4">
-  <h1>Make an appointment to visit our residents</h1>
-  <div id="div2">
-      <h4>Available slots:</h4>
-      <table id="table">
-          <tr>
-              <th>No.</th>
-              <th>date</th>
-              <th>Start time</th>
-              <th>End time</th>
-              <th>Option</th>
-          </tr>
-      </table>
+  <h1>Appointment</h1>
+
+  <div>
+      <h3>Generate visiting slots</h3>
+      <label for="date1">Enter the date:</label>
+      <input type="text" id="date1" required="" placeholder="YYYY-MM-DD">
+      <button id="generate" type="button" v-on:click="generateSlots()">Generate</button>
   </div>
 
   <div>
-      <h4>My appointment:</h4>
+      <h4>Booked slots:</h4>
       <table id="table1">
           <tr>
               <th>No.</th>
@@ -28,16 +23,17 @@
           </tr>
       </table>
   </div>
+
 </div>
 </template>
 
 <script>
-import ClientNavBar from '@/components/ClientNavBar.vue'
 import firebaseApp from '../firebase.js'
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import {getFirestore} from "firebase/firestore"
-import {doc, updateDoc} from "firebase/firestore"
+import { getFirestore} from "firebase/firestore"
+import {doc, addDoc, updateDoc} from "firebase/firestore"
 import {collection, getDocs} from "firebase/firestore"
+import AdminNavBar from '@/components/AdminNavBar.vue'
 const db = getFirestore(firebaseApp)
 
 export default {
@@ -48,66 +44,10 @@ export default {
         };
     },
     components: {
-        ClientNavBar
+        AdminNavBar
     },
     methods:{
         getSlots: async function () {
-            let a = await getDocs(collection(db, "Appointment"))
-            let ind = 1
-            a.forEach((docs) => {
-                let yy = docs.data()
-                var table = document.getElementById("table")
-
-                var id = (docs.id)
-                var date = (yy.date)
-                var start = (yy.starttime)
-                var end = (yy.endtime)
-                var name = (yy.name)
-
-                var today = new Date();
-                var dd = today.getDate();
-                var mm = today.getMonth()+1; 
-                var yyyy = today.getFullYear();
-                if(dd<10) {
-                    dd='0'+dd;} 
-                if(mm<10) {
-                    mm='0'+mm;} 
-                today = yyyy+'-'+mm+'-'+dd;
-
-                if (date>=today && name==="NA") { // if the date >= now && name === "NA"
-
-                var row = table.insertRow(ind)
-
-                var cell1 = row.insertCell(0)
-                var cell2 = row.insertCell(1)
-                var cell3 = row.insertCell(2)
-                var cell4 = row.insertCell(3)
-                var cell5 = row.insertCell(4)
-
-                cell1.innerHTML = ind
-                cell2.innerHTML = date
-                cell3.innerHTML = start
-                cell4.innerHTML = end
-
-                var bu = document.createElement("button")
-                bu.className="bwt"
-                bu.innerHTML="Book"
-                bu.addEventListener("click", () => {
-                    this.book(id);
-                    this.refresh()
-                });
-                cell5.appendChild(bu)
-                ind+=1
-                }
-            })
-        },
-        book: async function(id) {
-            alert("You are going to make an appointment")
-            await updateDoc(doc(db, "Appointment", id), {
-                name: this.username
-            });
-        },
-        mySlots: async function () {
             let a = await getDocs(collection(db, "Appointment"))
             let ind = 1
             a.forEach((docs) => {
@@ -130,7 +70,7 @@ export default {
                     mm='0'+mm;} 
                 today = yyyy+'-'+mm+'-'+dd;
 
-                if(date>=today && name=== this.username) {
+                if (date>=today && name!=="NA") { // if the date >= now && name === "NA"
 
                 var row = table.insertRow(ind)
 
@@ -139,43 +79,95 @@ export default {
                 var cell3 = row.insertCell(2)
                 var cell4 = row.insertCell(3)
                 var cell5 = row.insertCell(4)
-                var cell6 = row.insertCell(5)
 
                 cell1.innerHTML = ind
-                cell2.innerHTML = name
-                cell3.innerHTML = date
-                cell4.innerHTML = start
-                cell5.innerHTML = end
+                cell2.innerHTML = date
+                cell3.innerHTML = start
+                cell4.innerHTML = end
 
                 var bu = document.createElement("button")
                 bu.className="bwt"
-                bu.innerHTML="Cancel"
+                bu.innerHTML="Delete"
                 bu.addEventListener("click", () => {
-                    this.cancel(id);
+                    this.delete(id);
                     this.refresh()
                 });
-                cell6.appendChild(bu)
+                cell5.appendChild(bu)
                 ind+=1
                 }
             })
         },
-        cancel: async function (id) {
-            alert("You are going to cancel the appointment")
+        delete: async function(id) {
+            alert("You are going to delete this appointment booked by your client.")
             await updateDoc(doc(db, "Appointment", id), {
                 name: "NA"
             });
         },
         refresh: function refresh(){
-            let tb = document.getElementById("table")
-            while(tb.rows.length>1){
-                tb.deleteRow(1)
-            }
             let tb1 = document.getElementById("table1")
             while(tb1.rows.length>1){
                 tb1.deleteRow(1)
             }
             this.getSlots()
-            this.mySlots()
+        },
+        generateSlots: async function(){
+            var date1 = document.getElementById("date1").value
+            alert("You are going to generate visiting slots in " + date1)
+
+            var start1 = "10:00"
+            var end1 = "12:00"
+            var start2 = "12:00"
+            var end2 = "14:00"
+            var start3 = "14:00"
+            var end3 = "16:00"
+            var start4 = "16:00"
+            var end4 = "18:00"
+            
+            const docRef = collection(db, "Appointment");
+
+            const slot1 = await addDoc(docRef, {
+                name:"NA",
+                starttime:start1,
+                endtime:end1,
+                date:date1,
+            })
+            console.log(slot1.id)
+            // await updateDoc(doc(db, "Appointment", slot1.id), {
+            //     id: slot1.id
+            // });
+
+            const slot2 = await addDoc(docRef, {
+                name:"NA",
+                starttime:start2,
+                endtime:end2,
+                date:date1,
+            })
+            console.log(slot2.id)
+            // await updateDoc(doc(db, "Appointment", slot2.id), {
+            //     id: slot2.id
+            // });
+
+            const slot3 = await addDoc(docRef, {
+                name:"NA",
+                starttime:start3,
+                endtime:end3,
+                date:date1,
+            })
+            console.log(slot3.id)
+            // await updateDoc(doc(db, "Appointment", slot3.id), {
+            //     id: slot3.id
+            // });
+
+            const slot4 = await addDoc(docRef, {
+                name:"NA",
+                starttime:start4,
+                endtime:end4,
+                date:date1,
+            })
+            console.log(slot4.id)
+            // await updateDoc(doc(db, "Appointment", slot4.id), {
+            //     id: slot4.id
+            // });
         }
     },
     mounted(){
@@ -192,7 +184,6 @@ export default {
                 }
             })
             this.getSlots()
-            this.mySlots()
           }
         })
     }
