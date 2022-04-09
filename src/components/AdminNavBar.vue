@@ -23,6 +23,7 @@
                 Profile
               </a>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" v-if="user">
+                <!-- <li><router-link to="/Profile" class="dropdown-item">Personal</router-link></li> -->
                 <li><router-link to="/ContactUs" class="dropdown-item">Contact</router-link></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="#" @click="logOut()">Logout</a></li>

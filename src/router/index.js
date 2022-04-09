@@ -10,6 +10,7 @@ import Appointment from "../views/Slots.vue";
 import AdminAppointment from "../views/AdminSlots.vue";
 import ResidentHealthDataEntry from "../views/ResidentHealthDataEntry.vue";
 import EditData from "../views/EditData.vue";
+import Profile from "../views/Profile.vue";
 
 const routes = [
   {
@@ -71,6 +72,11 @@ const routes = [
     path: "/EditData/:id",
     name: "EditData",
     component: EditData,
+  },
+  {
+    path: "/Profile",
+    name: "Profile",
+    component: Profile,
   },
 ];
 

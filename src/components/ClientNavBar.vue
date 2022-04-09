@@ -23,6 +23,7 @@
                 Profile
               </a>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" v-if="user">
+                <li><router-link to="/Profile" class="dropdown-item">Personal</router-link></li>
                 <li ><router-link class="dropdown-item" :to="this.historical">Historical Data</router-link></li>
                 <li><router-link to="/ContactUs" class="dropdown-item">Contact</router-link></li>
                 <li><hr class="dropdown-divider"></li>
