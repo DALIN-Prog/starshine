@@ -228,8 +228,11 @@ export default {
         let vitalPoint = await getDocs(collection(db, "VitalPoint"))
         let latest = 0
         vitalPoint.forEach((docs) => {
-          holder.push(docs.data())
-          if (docs.data().created > latest && docs.data().residentID == this.id) {
+          if (docs.data().residentID === this.id) {
+            holder.push(docs.data())
+          }
+          
+          if (docs.data().created > latest && docs.data().residentID === this.id) {
             latest = docs.data().created
             this.temp = docs.data().temperature + " ℃"
             this.hr = docs.data().heartRate + " bpm"
