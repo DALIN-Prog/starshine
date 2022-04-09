@@ -87,7 +87,7 @@ export default {
                     nameCell.innerHTML = obj.data().name
                     phoneCell.innerHTML = obj.data().phone
                     bedCell.innerHTML = obj.data().bedNumber;
-                    condiCell.innerHTML = "condition" //obj.data().condition;
+                    condiCell.innerHTML = obj.data().condition;
                     admitCell.innerHTML = obj.data().createdAt.toDate().toDateString().slice(4) + " " + obj.data().createdAt.toDate().toLocaleTimeString('en-US');
                     const view = "<router-link id='view-" + obj.id + "' type='button' class='btn btn-primary btn-sm'>View</button>"
                     actionsCell.innerHTML = view;

@@ -5,7 +5,6 @@
   <div v-else>
     <ClientNavBar/>
   </div>
-  
   <h2 class="pageName">Resident Health Summary</h2>
   <div class="container">
     <div class="row">
@@ -153,24 +152,17 @@
             <option>Heart Rate</option>
             <option>Respiratory Rate</option>
         </select>
-          <!-- <select class="form-select mt-4 mb-4" aria-label="Default select example" v-model="val">
-            <option selected>Open this select menu</option>
-            <option value="1">Temperature</option>
-            <option value="2">Blood Pressure</option>
-            <option value="3">Heart Rate</option>
-            <option value="4">Respiratory Rate</option>
-          </select> -->
         <div v-if= "val === 'Temperature'">
-            <line-chart :data="{'2022-05-13': 2, '2022-05-14': 5}" :download="true"></line-chart>
+            <line-chart :data="this.charttemp" :download="true"></line-chart>
         </div>
         <div v-if= "val === 'Blood Pressure'">
-            <line-chart :data="{'2022-07-13': 2, '2022-07-14': 5}" :download="true"></line-chart>
+            <line-chart :data="this.chartbp" :download="true"></line-chart>
         </div>
         <div v-if= "val === 'Heart Rate'">
-            <line-chart :data="{'2022-05-13': 2, '2022-05-14': 5}" :download="true"></line-chart>
+            <line-chart :data="this.charthr" :download="true"></line-chart>
         </div>
         <div v-if= "val === 'Respiratory Rate'">
-            <line-chart :data="{'2022-05-13': 2, '2022-05-14': 5}" :download="true"></line-chart>
+            <line-chart :data="this.chartrr" :download="true"></line-chart>
         </div>
         <router-link type="button" class="btn btn-outline-primary btn-lg hist" :to="this.historical">View Historical Data</router-link>
         <router-link type= "button" class="btn btn-outline-primary btn-lg add" :to="this.dataentry" v-if="admin">Add Vital Points</router-link> <!-- only for admin -->
@@ -207,42 +199,66 @@ export default {
           hr: 0,
           rp: 0,
           val:"",
-          chartVal: [{
-            date: "",
-            reading: ""
-          }]
+          arr:[],
+          chartbp: {},
+          charttemp: {},
+          charthr: {},
+          chartrr: {}
       }
   },
-
   mounted () {
-      const auth = getAuth();
-      onAuthStateChanged(auth, async user => {
-          if (user) {
-              this.user = auth.currentUser // set user to current user)
-              let documents = await getDocs(collection(db, "User"))
-              documents.forEach((docs) => {
-                let data = docs.data()
-                if (docs.id === this.user.uid) {
-                  this.admin = data.isAdmin
-                }
-              })
-              if (this.admin) {
-                  this.dataentry += this.id
-                }
-              this.historical+=this.id
-              let vitalPoint = await getDocs(collection(db, "VitalPoint"))
-              let latest = 0
-              vitalPoint.forEach((docs) => {
-                if (docs.data().created > latest && docs.data().residentID == this.id) {
-                  latest = docs.data().created
-                  this.temp = docs.data().temperature + " ℃"
-                  this.hr = docs.data().heartRate + " bpm"
-                  this.bp = docs.data().bloodPressure + " mm Hg"
-                  this.rp = docs.data().respiratoryRate + " bpm"
-                }
-              })
+    const auth = getAuth();
+    const holder = []
+    onAuthStateChanged(auth, async user => {
+      if (user) {
+        this.user = auth.currentUser // set user to current user)
+        let documents = await getDocs(collection(db, "User"))
+              
+        documents.forEach((docs) => {
+          let data = docs.data()
+          if (docs.id === this.user.uid) {
+            this.admin = data.isAdmin
           }
-      })
+        })
+        
+        if (this.admin) {
+          this.dataentry += this.id
+        }
+        this.historical+=this.id
+        let vitalPoint = await getDocs(collection(db, "VitalPoint"))
+        let latest = 0
+        vitalPoint.forEach((docs) => {
+          holder.push(docs.data())
+          if (docs.data().created > latest && docs.data().residentID == this.id) {
+            latest = docs.data().created
+            this.temp = docs.data().temperature + " ℃"
+            this.hr = docs.data().heartRate + " bpm"
+            this.bp = docs.data().bloodPressure + " mm Hg"
+            this.rp = docs.data().respiratoryRate + " bpm"
+          }
+        })
+        holder.sort(this.compare)
+        this.arr = holder.slice(0,7)
+        this.arr.forEach((vp) => {
+          const date = new Date(vp.created.seconds*1000).toLocaleString().substring(0,10)
+          const day = date.slice(0,2)
+          const month = date.slice(3,5)
+          const year = date.slice(6,10)
+          const finalDate = year +"-" + month + "-" + day
+          console.log(new Date(vp.created.seconds*1000).toLocaleString().substring(0,10))
+          // console.log(vp.created.toDate().toDateString().slice(4))
+          this.charttemp[finalDate] = vp.temperature
+          this.chartbp[finalDate] = vp.bloodPressure
+          this.chartrr[finalDate] = vp.respiratoryRate
+          this.charthr[finalDate] = vp.heartRate
+        })
+      }
+    })
+  },
+  methods: {
+    compare: function (a, b) {
+        return b.created - a.created
+    },
   }
 
 }
