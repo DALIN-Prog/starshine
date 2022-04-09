@@ -1,5 +1,13 @@
 <template>
-  <UserNavBar />
+    <div v-if="admin && user">
+        <AdminNavBar/>
+    </div>
+    <div v-if="!admin && user">
+        <ClientNavBar/>
+    </div>
+    <div v-if="!user">
+        <NonLoginNavBar/>
+    </div>
   <div id="InsidePicture">
   <h1 id="header" class="mt-4">Contact Us</h1>
   <h2 id="name" class="mb-4">Starshine Nursing Home</h2>
@@ -38,11 +46,15 @@
 </template>
 
 <script>
-import UserNavBar from "../components/UserNavBar.vue";
+import AdminNavBar from "../components/AdminNavBar.vue"
+import ClientNavBar from "../components/ClientNavBar.vue"
+import NonLoginNavBar from "../components/NonLoginNavBar.vue"
 export default {
     name: "ContactUs",
     components: {
-    UserNavBar,
+        AdminNavBar,
+        ClientNavBar,
+        NonLoginNavBar,
   },
 
 }

@@ -1,5 +1,5 @@
 <template>
-  <UserNavBar />
+  <AdminNavBar />
   <div v-if="error" class="alert alert-danger">
     {{ error }}
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -86,7 +86,7 @@
 </template>
 
 <script>
-import UserNavBar from "../components/UserNavBar.vue";
+import AdminNavBar from "../components/AdminNavBar.vue";
 import firebase from "@/uifire.js";
 import "firebase/compat/auth";
 import "firebaseui/dist/firebaseui.css";
@@ -97,7 +97,7 @@ const db = getFirestore(firebaseApp);
 export default {
   name: "AccountCreation",
   components: {
-    UserNavBar,
+    AdminNavBar,
   },
   data() {
     return {

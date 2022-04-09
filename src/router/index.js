@@ -2,13 +2,13 @@ import { createRouter, createWebHistory } from "vue-router";
 import LandingPage from "../views/LandingPage.vue";
 import Login from "../views/Login.vue";
 import AccountCreation from "../views/AccountCreation.vue";
-import HealthSum from "../views/HealthSummary.vue";
-import HealthSumView from "../views/HealthSummary.vue";
-import ResMgmt from "../views/ResidentManagement.vue";
+import HealthSummary from "../views/HealthSummary.vue";
+import ResManagement from "../views/ResidentManagement.vue";
 import HistoricalData from "../views/HistoricalData.vue";
 import ContactUs from "../views/ContactUs.vue";
 import Appointment from "../views/Slots.vue";
 import ResidentHealthDataEntry from "../views/ResidentHealthDataEntry.vue";
+import EditData from "../views/EditData.vue";
 
 const routes = [
   {
@@ -27,22 +27,17 @@ const routes = [
     component: AccountCreation,
   },
   {
-    path: "/HealthSummary",
-    name: "HealthSummary",
-    component: HealthSum,
-  },
-  {
     path: "/HealthSummary/:id",
-    name: "HealthSummaryView",
-    component: HealthSumView,
+    name: "HealthSummary",
+    component: HealthSummary,
   },
   {
     path: "/ResidentManagement",
     name: "ResidentManagement",
-    component: ResMgmt,
+    component: ResManagement,
   },
   {
-    path: "/HistoricalData",
+    path: "/HistoricalData/:id",
     name: "HistoricalData",
     component: HistoricalData,
   },
@@ -62,9 +57,14 @@ const routes = [
     component: Appointment,
   },
   {
-    path: "/DataEntry",
+    path: "/DataEntry/:id",
     name: "ResidentHealthDataEntry",
     component: ResidentHealthDataEntry,
+  },
+  {
+    path: "/EditData/:id",
+    name: "EditData",
+    component: EditData,
   },
 ];
 

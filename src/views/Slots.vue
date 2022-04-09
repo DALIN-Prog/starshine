@@ -1,5 +1,10 @@
 <template>
-<UserNavBar/>
+<div v-if="admin">
+    <AdminNavBar/>
+  </div>
+  <div v-else>
+    <ClientNavBar/>
+  </div>
 <div id="main" class="ml-4">
   <h1>Appointment</h1>
   <div id="div1">
@@ -40,12 +45,13 @@
 </template>
 
 <script>
+import AdminNavBar from '@/components/AdminNavBar.vue'
+import ClientNavBar from '@/components/ClientNavBar.vue'
 import firebaseApp from '../firebase.js'
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {getFirestore} from "firebase/firestore"
 import {doc, setDoc, updateDoc} from "firebase/firestore"
 import {collection, getDocs} from "firebase/firestore"
-import UserNavBar from '@/components/UserNavBar.vue'
 const db = getFirestore(firebaseApp)
 
 export default {
@@ -57,7 +63,8 @@ export default {
         };
     },
     components: {
-        UserNavBar
+        AdminNavBar,
+        ClientNavBar
     },
     methods:{
         search: function(){

@@ -1,5 +1,5 @@
 <template>
-    <UserNavBar/>
+    <AdminNavBar/>
     <h2 class="pageName">Resident Management</h2>
     <div class="container">
         <div class="row justify-content-center">
@@ -46,12 +46,12 @@ import firebaseApp from '@/firebase.js';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
 const db = getFirestore(firebaseApp);
-import UserNavBar from '@/components/UserNavBar.vue'
+import AdminNavBar from '@/components/AdminNavBar.vue'
 
 export default {
     name: "ResidentManagement",
     components: {
-        UserNavBar
+        AdminNavBar
     },
 
     data () {
