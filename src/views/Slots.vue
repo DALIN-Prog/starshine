@@ -1,33 +1,40 @@
 <template>
 <ClientNavBar/>
-<div id="main" class="ml-4">
-  <h1>Make an appointment to visit our residents</h1>
-  <div id="div2">
-      <h4>Available slots:</h4>
-      <table id="table">
-          <tr>
-              <th>No.</th>
-              <th>date</th>
-              <th>Start time</th>
-              <th>End time</th>
-              <th>Option</th>
-          </tr>
-      </table>
-  </div>
+<div class="container">
+        <div class="row">
+            <h2 id="title" style="text-align:center">Make an appointment to visit our residents</h2>
+        </div>
+</div>
 
-  <div>
-      <h4>My appointment:</h4>
-      <table id="table1">
-          <tr>
-              <th>No.</th>
-              <th>Name</th>
-              <th>date</th>
-              <th>Start time</th>
-              <th>End time</th>
-              <th>Option</th>
-          </tr>
-      </table>
-  </div>
+<div class="container">
+    <table class="table table-striped table-hover" id="table">
+        <h4>Available slots:</h4>
+        <thead>
+            <tr>
+                <th scope="col">No.</th>
+                <th scope="col">date</th>
+                <th scope="col">Start time</th>
+                <th scope="col">End time</th>
+                <th scope="col">Option</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+<div class="container">
+    <table class="table table-striped table-hover" id="table1">
+        <h4>My appointment:</h4>
+        <thead>
+            <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Name</th>
+                <th scope="col">date</th>
+                <th scope="col">Start time</th>
+                <th scope="col">End time</th>
+                <th scope="col">Option</th>
+            </tr>
+        </thead>
+    </table>
 </div>
 </template>
 
@@ -90,7 +97,7 @@ export default {
                 cell4.innerHTML = end
 
                 var bu = document.createElement("button")
-                bu.className="bwt"
+                bu.className="btn btn-sm btn-primary"
                 bu.innerHTML="Book"
                 bu.addEventListener("click", () => {
                     this.book(id);
@@ -148,7 +155,7 @@ export default {
                 cell5.innerHTML = end
 
                 var bu = document.createElement("button")
-                bu.className="bwt"
+                bu.className="btn btn-sm btn-secondary"
                 bu.innerHTML="Cancel"
                 bu.addEventListener("click", () => {
                     this.cancel(id);
@@ -201,21 +208,10 @@ export default {
 </script>
 
 <style scoped>
-#picker{
-    width: 700px;
-}
-table{
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 700px
-}
-tr:nth-child(even) {
-    background-color: #e3edee;
-}
-th,td{
-    border: 1px solid #dddddd;
-    text-align: center;
-    padding:8px
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Sacramento&display=swap');
+#title {
+    font-family: Merriweather;
+    margin: 16px 0 16px 0;
 }
 
 </style>

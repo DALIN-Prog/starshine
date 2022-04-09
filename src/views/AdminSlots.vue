@@ -1,28 +1,36 @@
 <template>
 <AdminNavBar/>
+<div class="container">
+        <div class="row">
+            <h2 id="title" style="text-align:center">Appointment</h2>
+        </div>
+</div>
 <div id="main" class="ml-4">
-  <h1>Appointment</h1>
 
-  <div>
-      <h3>Generate visiting slots</h3>
-      <label for="date1">Enter the date:</label>
-      <input type="text" id="date1" required="" placeholder="YYYY-MM-DD">
-      <button id="generate" type="button" v-on:click="generateSlots()">Generate</button>
-  </div>
+<div class="container mb-8">
+    <div>
+        <h2 class="header2">Generate visiting slots</h2>
+        <label class="me-2" for="date1">Enter the date:</label>
+        <input type="text" id="date1" required="" placeholder="YYYY-MM-DD">
+        <button class="btn btn-primary ms-3" id="generate" type="button" v-on:click="generateSlots()">Generate</button>
+    </div>
+</div>
 
-  <div>
-      <h4>Booked slots:</h4>
-      <table id="table1">
-          <tr>
-              <th>No.</th>
-              <th>Name</th>
-              <th>date</th>
-              <th>Start time</th>
-              <th>End time</th>
-              <th>Option</th>
-          </tr>
-      </table>
-  </div>
+<div class="container mt-4">
+    <table class="table table-striped table-hover" id="table1">
+        <h4>Booked slots:</h4>
+        <thead>
+            <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Name</th>
+                <th scope="col">date</th>
+                <th scope="col">Start time</th>
+                <th scope="col">End time</th>
+                <th scope="col">Option</th>
+            </tr>
+        </thead>
+    </table>
+</div>
 
 </div>
 </template>
@@ -40,7 +48,6 @@ export default {
     data() {
         return {
             user: false,
-            username:""
         };
     },
     components: {
@@ -79,20 +86,23 @@ export default {
                 var cell3 = row.insertCell(2)
                 var cell4 = row.insertCell(3)
                 var cell5 = row.insertCell(4)
+                var cell6 = row.insertCell(5)
 
                 cell1.innerHTML = ind
-                cell2.innerHTML = date
-                cell3.innerHTML = start
-                cell4.innerHTML = end
+                cell2.innerHTML = name
+                cell3.innerHTML = date
+                cell4.innerHTML = start
+                cell5.innerHTML = end
+                
 
                 var bu = document.createElement("button")
-                bu.className="bwt"
+                bu.className="btn btn-sm btn-danger"
                 bu.innerHTML="Delete"
                 bu.addEventListener("click", () => {
                     this.delete(id);
                     this.refresh()
                 });
-                cell5.appendChild(bu)
+                cell6.appendChild(bu)
                 ind+=1
                 }
             })
@@ -175,38 +185,18 @@ export default {
         onAuthStateChanged(auth, async user => {
           if (user) {
             this.user = auth.currentUser // set user to current user)
-            let documents = await getDocs(collection(db, "User"))
-            documents.forEach((docs) => {
-                let data = docs.data()
-                if (docs.id === this.user.uid) {
-                    this.username = data.name
-                    //console.log(this.username)
-                }
-            })
-            this.getSlots()
           }
         })
+        this.getSlots()
     }
 
 }
 </script>
 
 <style scoped>
-#picker{
-    width: 700px;
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Sacramento&display=swap');
+#title, .header2 {
+    font-family: Merriweather;
+    margin: 16px 0 16px 0;
 }
-table{
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 700px
-}
-tr:nth-child(even) {
-    background-color: #e3edee;
-}
-th,td{
-    border: 1px solid #dddddd;
-    text-align: center;
-    padding:8px
-}
-
 </style>
