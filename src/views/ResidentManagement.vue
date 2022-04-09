@@ -1,5 +1,5 @@
 <template>
-    <UserNavBar/>
+    <AdminNavBar/>
     <h2 class="pageName">Resident Management</h2>
     <div class="container">
         <div class="row justify-content-center">
@@ -46,12 +46,12 @@ import firebaseApp from '@/firebase.js';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
 const db = getFirestore(firebaseApp);
-import UserNavBar from '@/components/UserNavBar.vue'
+import AdminNavBar from '@/components/AdminNavBar.vue'
 
 export default {
     name: "ResidentManagement",
     components: {
-        UserNavBar
+        AdminNavBar
     },
 
     data () {
@@ -59,7 +59,7 @@ export default {
             user: false,
             totalAppt: 0,
             totalRes: 0,
-            userArr: []
+            userArr: [],
         }
     },
 
@@ -89,17 +89,22 @@ export default {
                     bedCell.innerHTML = obj.data().bedNumber;
                     condiCell.innerHTML = "condition" //obj.data().condition;
                     admitCell.innerHTML = obj.data().createdAt.toDate().toDateString().slice(4) + " " + obj.data().createdAt.toDate().toLocaleTimeString('en-US');
-                    const edit = "<button id='view-" + obj.id + "' type='button' class='btn btn-primary btn-sm'>View</button>"
-                    actionsCell.innerHTML = edit;
+                    const view = "<router-link id='view-" + obj.id + "' type='button' class='btn btn-primary btn-sm'>View</button>"
+                    actionsCell.innerHTML = view;
                     var btnView = document.getElementById("view-" + obj.id)
                     btnView.addEventListener("click", () => {
                         this.viewData(obj.id);
                     });
-                    index++
+                index++
+                })
+                let app = await getDocs(collection(db, "Appointment"))
+                app.forEach((docs) => {
+                    if (docs.data().name !== "NA") {
+                        this.totalAppt++;
+                    }
                 })
 
             }
-
         })
     },
     methods: {
@@ -108,8 +113,8 @@ export default {
             if(a.data().name > b.data().name) { return 1; }
             return 0;
         },
-        viewData: function () {
-
+        viewData: function (id) {
+            this.$router.push("/HealthSummary/" + id)
         }
     }
 }

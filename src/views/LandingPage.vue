@@ -1,5 +1,13 @@
 <template>
-    <UserNavBar/>
+    <div v-if="admin && user">
+        <AdminNavBar/>
+    </div>
+    <div v-if="!admin && user">
+        <ClientNavBar/>
+    </div>
+    <div v-if="!user">
+        <NonLoginNavBar/>
+    </div>
     <div id="about">
         <h1>{{this.welcomeMessage}}</h1>
         
@@ -13,7 +21,9 @@
 </template>
 
 <script>
-import UserNavBar from "../components/UserNavBar.vue"
+import AdminNavBar from "../components/AdminNavBar.vue"
+import ClientNavBar from "../components/ClientNavBar.vue"
+import NonLoginNavBar from "../components/NonLoginNavBar.vue"
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import firebaseApp from "../firebase.js"
 import { getFirestore, collection, getDocs } from "firebase/firestore"
@@ -21,7 +31,9 @@ const db = getFirestore(firebaseApp)
 export default {
     name: "LandingPage",
     components: {
-        UserNavBar,
+        AdminNavBar,
+        ClientNavBar,
+        NonLoginNavBar,
     },
     methods: {
 
@@ -29,13 +41,13 @@ export default {
     data() {
         return {
             user: false,
+            admin: false,
             welcomeMessage: "About Us"
         }
     },
     mounted() {
         const auth = getAuth();
         onAuthStateChanged(auth, async user => {
-            //console.log("line 35", user)
             if (user) { // if logged in
                 this.user = auth.currentUser // set user to current user)
                 let documents = await getDocs(collection(db, "User"))
@@ -44,13 +56,13 @@ export default {
                     //console.log(docs.id)
                     if (docs.id === this.user.uid) {
                         console.log(data)
-                        this.welcomeMessage = "Welcome " + data.name //this.user.displayName
+                        this.welcomeMessage = "Welcome " + data.name 
+                        this.admin = data.isAdmin
                         //console.log(this.user);
                     }
                 }) 
             } else { // if not logged in, default message will be 'About us'
                 this.welcomeMessage = "About us"
-                console.log("AboutUs line 30")
             }
         })
     },

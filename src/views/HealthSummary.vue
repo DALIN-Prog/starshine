@@ -1,5 +1,11 @@
 <template>
-  <UserNavBar/>
+  <div v-if="admin">
+    <AdminNavBar/>
+  </div>
+  <div v-else>
+    <ClientNavBar/>
+  </div>
+  
   <h2 class="pageName">Resident Health Summary</h2>
   <div class="container">
     <div class="row">
@@ -152,9 +158,8 @@
           </ul>
         </div>
         <line-chart :data="{'2022-05-13': 2, '2022-05-14': 5}" :download="true"></line-chart>
-        <router-link type="button" class="btn btn-outline-primary btn-lg hist" to="/HistoricalData">View Historical Data</router-link>
-
-        <router-link type= "button" class="btn btn-outline-primary btn-lg add" to="/DataEntry" v-if="admin">Add Vital Points</router-link> <!-- only for admin -->
+        <router-link type="button" class="btn btn-outline-primary btn-lg hist" :to="this.historical">View Historical Data</router-link>
+        <router-link type= "button" class="btn btn-outline-primary btn-lg add" :to="this.dataentry" v-if="admin">Add Vital Points</router-link> <!-- only for admin -->
       </div>
     </div>
   </div>
@@ -162,21 +167,27 @@
 </template>
 
 <script>
+import AdminNavBar from '@/components/AdminNavBar.vue'
+import ClientNavBar from '@/components/ClientNavBar.vue'
 import firebaseApp from '@/firebase.js';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
 const db = getFirestore(firebaseApp);
-import UserNavBar from '@/components/UserNavBar.vue'
+
 
 export default {
   name: "HealthSummary",
   components: {
-    UserNavBar
+    AdminNavBar,
+    ClientNavBar
   },
   data () {
       return {
           user:false,
           admin: true,
+          id: this.$route.params.id,
+          historical:"/HistoricalData/",
+          dataentry:"/DataEntry/",
           temp: 0,
           bp: 0,
           hr: 0,
@@ -191,15 +202,19 @@ export default {
               this.user = auth.currentUser // set user to current user)
               let documents = await getDocs(collection(db, "User"))
               documents.forEach((docs) => {
-                  let data = docs.data()
-                  if (docs.id === this.user.uid) {
-                      this.admin = data.isAdmin
-                  }
+                let data = docs.data()
+                if (docs.id === this.user.uid) {
+                  this.admin = data.isAdmin
+                }
               })
+              if (this.admin) {
+                  this.dataentry += this.id
+                }
+              this.historical+=this.id
               let vitalPoint = await getDocs(collection(db, "VitalPoint"))
               let latest = 0
               vitalPoint.forEach((docs) => {
-                if (docs.data().created > latest && docs.data().residentID === this.user.uid) {
+                if (docs.data().created > latest && docs.data().residentID == this.id) {
                   latest = docs.data().created
                   this.temp = docs.data().temperature + " ℃"
                   this.hr = docs.data().heartRate + " bpm"

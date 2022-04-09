@@ -1,5 +1,5 @@
 <template>
-<UserNavBar/>
+<AdminNavBar/>
 <div id="main" class="ml-4">
   <h1>Appointment</h1>
 
@@ -33,7 +33,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {getFirestore} from "firebase/firestore"
 import {doc, addDoc, updateDoc} from "firebase/firestore"
 import {collection, getDocs} from "firebase/firestore"
-import UserNavBar from '@/components/UserNavBar.vue'
+import AdminNavBar from '@/components/AdminNavBar.vue'
 const db = getFirestore(firebaseApp)
 
 export default {
@@ -44,7 +44,7 @@ export default {
         };
     },
     components: {
-        UserNavBar
+        AdminNavBar
     },
     methods:{
         getSlots: async function () {

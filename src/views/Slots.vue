@@ -1,6 +1,5 @@
 <template>
-<UserNavBar/>
-<h1>{{this.username}}</h1>
+<ClientNavBar/>
 <div id="main" class="ml-4">
   <h1>Make an appointment to visit our residents</h1>
   <div id="div2">
@@ -33,12 +32,12 @@
 </template>
 
 <script>
+import ClientNavBar from '@/components/ClientNavBar.vue'
 import firebaseApp from '../firebase.js'
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {getFirestore} from "firebase/firestore"
 import {doc, updateDoc} from "firebase/firestore"
 import {collection, getDocs} from "firebase/firestore"
-import UserNavBar from '@/components/UserNavBar.vue'
 const db = getFirestore(firebaseApp)
 
 export default {
@@ -49,7 +48,7 @@ export default {
         };
     },
     components: {
-        UserNavBar
+        ClientNavBar
     },
     methods:{
         getSlots: async function () {

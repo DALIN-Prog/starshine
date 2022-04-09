@@ -2,13 +2,14 @@ import { createRouter, createWebHistory } from "vue-router";
 import LandingPage from "../views/LandingPage.vue";
 import Login from "../views/Login.vue";
 import AccountCreation from "../views/AccountCreation.vue";
-import HealthSum from "../views/HealthSummary.vue";
-import ResMgmt from "../views/ResidentManagement.vue";
+import HealthSummary from "../views/HealthSummary.vue";
+import ResManagement from "../views/ResidentManagement.vue";
 import HistoricalData from "../views/HistoricalData.vue";
 import ContactUs from "../views/ContactUs.vue";
 import Appointment from "../views/Slots.vue";
 import AdminAppointment from "../views/AdminSlots.vue";
 import ResidentHealthDataEntry from "../views/ResidentHealthDataEntry.vue";
+import EditData from "../views/EditData.vue";
 
 const routes = [
   {
@@ -27,17 +28,17 @@ const routes = [
     component: AccountCreation,
   },
   {
-    path: "/HealthSummary",
+    path: "/HealthSummary/:id",
     name: "HealthSummary",
-    component: HealthSum,
+    component: HealthSummary,
   },
   {
     path: "/ResidentManagement",
     name: "ResidentManagement",
-    component: ResMgmt,
+    component: ResManagement,
   },
   {
-    path: "/HistoricalData",
+    path: "/HistoricalData/:id",
     name: "HistoricalData",
     component: HistoricalData,
   },
@@ -57,7 +58,7 @@ const routes = [
     component: Appointment,
   },
   {
-    path: "/DataEntry",
+    path: "/DataEntry/:id",
     name: "ResidentHealthDataEntry",
     component: ResidentHealthDataEntry,
   },
@@ -65,6 +66,11 @@ const routes = [
     path: "/AdminSlots",
     name: "AdminAppointmentPage",
     component: AdminAppointment,
+  },
+  {
+    path: "/EditData/:id",
+    name: "EditData",
+    component: EditData,
   },
 ];
 

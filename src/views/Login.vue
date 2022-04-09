@@ -1,5 +1,5 @@
 <template>
-    <UserNavBar/>
+    <NonLoginNavBar/>
     <div v-if="error" class="alert alert-danger alert-dismissible fade show" role="alert">
         {{ error }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -53,12 +53,12 @@
 import firebase from "../uifire.js";
 import "firebase/compat/auth";
 import "firebaseui/dist/firebaseui.css";
-import UserNavBar from "../components/UserNavBar.vue"
+import NonLoginNavBar from "../components/NonLoginNavBar.vue"
 
 export default {
     name: "Login",
     components: {
-        UserNavBar
+        NonLoginNavBar
     },
     data() {
         return {

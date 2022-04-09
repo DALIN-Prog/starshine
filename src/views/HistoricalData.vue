@@ -1,9 +1,14 @@
 <template>
-    <UserNavBar/>
+    <div v-if="admin">
+        <AdminNavBar/>
+    </div>
+    <div v-else>
+        <ClientNavBar/>
+    </div>
     <div class="container">
         <div class="row">
             <h2 id="title" style="text-align:center">{{displayname}}'s Past Data</h2>
-            <router-link class="btn btn-outline-primary btn-lg" to="/DataEntry" v-on:click="addVitals()" v-if="admin">Add Vital Points</router-link>
+            <router-link class="btn btn-outline-primary btn-lg mb-4" v-if="admin" :to="this.entry">Add Vital Points</router-link>
         </div>
     </div>
 
@@ -28,21 +33,27 @@
 </template>
 
 <script>
+import AdminNavBar from '@/components/AdminNavBar.vue'
+import ClientNavBar from '@/components/ClientNavBar.vue'
 import firebaseApp from '@/firebase.js';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { collection, getDocs, getFirestore, doc, deleteDoc } from "firebase/firestore";
 const db = getFirestore(firebaseApp);
-import UserNavBar from '@/components/UserNavBar.vue'
+
 
 export default {
     name: "HistoricalData",
     components: {
-        UserNavBar
+        AdminNavBar,
+        ClientNavBar
     },
 
     data() {
         return {
             displayname: "",
+            id: this.$route.params.id,
+            entry: "/DataEntry/",
+            edit: "/EditData/",
             user: false,
             admin: false,
             arr: [],
@@ -53,6 +64,7 @@ export default {
 
     mounted() {
         const auth = getAuth();
+        this.entry += this.id
         onAuthStateChanged(auth, async user => {
             if (user) { // if logged in
                 this.user = auth.currentUser // set user to current user)
@@ -61,16 +73,17 @@ export default {
                     let data = docs.data()
                     if (docs.id === this.user.uid) {
                         //console.log(data)
-                        this.displayname = data.name //this.user.displayName
                         this.admin = data.isAdmin
-                        //console.log(this.user);
+                    } 
+                    if (docs.id === this.id) {
+                        this.displayname = data.name //this.user.displayName
                     }
                 })
                 let vitalPoint = await getDocs(collection(db, "VitalPoint"))
                 vitalPoint.forEach((docs) => {
                     // console.log(docs.data())
                     let data = docs.data()
-                    if (this.user.uid === data.residentID) {
+                    if (this.id === data.residentID) {
                         this.arr.push(docs)
                     }
                 })
@@ -96,17 +109,16 @@ export default {
                         const edit = "<button id='edit-" + obj.id + "' type='button' class='btn btn-primary btn-sm'>Edit</button>"
                         const del = "<button id='del-" + obj.id + "' type='button' class='btn btn-danger btn-sm'>Delete</button></div>"
                         actionsCell.innerHTML = group + edit + del;
-                        // var btnEdit = document.getElementById("edit-" + obj.id)
+                        var btnEdit = document.getElementById("edit-" + obj.id)
                         var btnDelete = document.getElementById("del-" + obj.id)
                         
-                        // btnEdit.addEventListener("click", () => {
-                        //     editData(obj.id);
-                        // });
+                        btnEdit.addEventListener("click", () => {
+                            this.editData(obj.id);
+                        });
                         btnDelete.addEventListener("click", () => {
                             this.deleteData(obj.id);
                         });
                     }
-                    
                     index++
                 })
             }
@@ -121,6 +133,10 @@ export default {
             alert("You're deleting a vital point")
             await deleteDoc(doc(db, "VitalPoint", docID))
             location.reload();
+        },
+        editData: function(docID) {
+            this.edit += docID
+            this.$router.push(this.edit)
         }
         
     }
