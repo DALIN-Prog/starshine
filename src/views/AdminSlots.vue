@@ -30,7 +30,7 @@
 <script>
 import firebaseApp from '../firebase.js'
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import {getFirestore} from "firebase/firestore"
+import { getFirestore} from "firebase/firestore"
 import {doc, addDoc, updateDoc} from "firebase/firestore"
 import {collection, getDocs} from "firebase/firestore"
 import AdminNavBar from '@/components/AdminNavBar.vue'
@@ -54,7 +54,7 @@ export default {
                 let yy = docs.data()
                 var table = document.getElementById("table1")
 
-                var id = (yy.id)
+                var id = (docs.id)
                 var date = (yy.date)
                 var start = (yy.starttime)
                 var end = (yy.endtime)
