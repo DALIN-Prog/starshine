@@ -59,7 +59,7 @@ export default {
             user: false,
             totalAppt: 0,
             totalRes: 0,
-            userArr: []
+            userArr: [],
         }
     },
 
@@ -89,17 +89,22 @@ export default {
                     bedCell.innerHTML = obj.data().bedNumber;
                     condiCell.innerHTML = "condition" //obj.data().condition;
                     admitCell.innerHTML = obj.data().createdAt.toDate().toDateString().slice(4) + " " + obj.data().createdAt.toDate().toLocaleTimeString('en-US');
-                    const edit = "<router-link id='view-" + obj.id + "' type='button' class='btn btn-primary btn-sm'>View</button>"
-                    actionsCell.innerHTML = edit;
+                    const view = "<router-link id='view-" + obj.id + "' type='button' class='btn btn-primary btn-sm'>View</button>"
+                    actionsCell.innerHTML = view;
                     var btnView = document.getElementById("view-" + obj.id)
                     btnView.addEventListener("click", () => {
                         this.viewData(obj.id);
                     });
-                    index++
+                index++
+                })
+                let app = await getDocs(collection(db, "Appointment"))
+                app.forEach((docs) => {
+                    if (docs.data().name !== "NA") {
+                        this.totalAppt++;
+                    }
                 })
 
             }
-
         })
     },
     methods: {
