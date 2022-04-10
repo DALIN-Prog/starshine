@@ -35,7 +35,7 @@
                 <label for="phone" class="col-md-4 col-form-label text-md-right" >Phone</label >
 
                 <div class="col-md-6">
-                  <input id="phone" type="number" class="form-control" name="phone" v-model="form.phone" required/>
+                  <input id="phone" type="text" class="form-control" name="phone" v-model="form.phone" required/>
                 </div>
               </div>
 

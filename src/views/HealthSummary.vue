@@ -5,7 +5,7 @@
   <div v-else>
     <ClientNavBar/>
   </div>
-  <h2 class="pageName">Resident Health Summary</h2>
+  <h2 class="pageName">{{patient}}'s Health Summary</h2>
   <div class="container">
     <div class="row">
       <div class="col-sm-3">
@@ -136,15 +136,7 @@
   
   <div class="container image">
     <div class="row">
-      <div class="col-sm-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Elderly Image</h5>
-          </div>
-          <img src="@/assets/people.png" class="card-img-bottom" alt="...">
-        </div>
-      </div>
-      <div class="col-sm-8 border chart">
+      <div class="col border chart">
         <select class="form-select mt-4 mb-4" v-model="val">
             <option value="">Please select one </option>
             <option>Temperature</option>
@@ -164,8 +156,8 @@
         <div v-if= "val === 'Respiratory Rate'">
             <line-chart :data="this.chartrr" :download="true"></line-chart>
         </div>
-        <router-link type="button" class="btn btn-outline-primary btn-lg hist" :to="this.historical">View Historical Data</router-link>
-        <router-link type= "button" class="btn btn-outline-primary btn-lg add" :to="this.dataentry" v-if="admin">Add Vital Points</router-link> <!-- only for admin -->
+        <router-link type="button" class="btn btn-outline-primary hist mb-2" :to="this.historical">View Historical Data</router-link>
+        <router-link type= "button" class="btn btn-outline-primary add mb-2" :to="this.dataentry" v-if="admin">Add Vital Points</router-link> <!-- only for admin -->
       </div>
     </div>
   </div>
@@ -199,6 +191,7 @@ export default {
           hr: 0,
           rp: 0,
           val:"",
+          patient:"",
           arr:[],
           chartbp: {},
           charttemp: {},
@@ -218,6 +211,9 @@ export default {
           let data = docs.data()
           if (docs.id === this.user.uid) {
             this.admin = data.isAdmin
+          }
+          if (this.id === docs.id) {
+            this.patient = data.name
           }
         })
         

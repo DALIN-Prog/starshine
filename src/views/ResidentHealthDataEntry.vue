@@ -18,7 +18,7 @@
                 <label for="temp" class="col-md-4 col-form-label text-md-right">Temperature</label>
 
                 <div class="col-md-6">
-                  <input id="temp" type="text" class="form-control" name="temp" v-model="form.temp" pattern="^\d*(\.\d{0,2})?$" required/>
+                  <input id="temp" type="text" class="form-control" name="temp" v-model="form.temp" required/>
                 </div>
               </div>
 
