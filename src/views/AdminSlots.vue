@@ -32,6 +32,22 @@
     </table>
 </div>
 
+<div class="container mt-4">
+    <table class="table table-striped table-hover" id="table2">
+        <h4>Available slots:</h4>
+        <thead>
+            <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Name</th>
+                <th scope="col">date</th>
+                <th scope="col">Start time</th>
+                <th scope="col">End time</th>
+                <th scope="col">Option</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
 </div>
 </template>
 
@@ -39,7 +55,7 @@
 import firebaseApp from '../firebase.js'
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore} from "firebase/firestore"
-import {doc, addDoc, updateDoc} from "firebase/firestore"
+import {doc, addDoc, deleteDoc, updateDoc} from "firebase/firestore"
 import {collection, getDocs} from "firebase/firestore"
 import AdminNavBar from '@/components/AdminNavBar.vue'
 const db = getFirestore(firebaseApp)
@@ -97,12 +113,63 @@ export default {
 
                 var bu = document.createElement("button")
                 bu.className="btn btn-sm btn-danger"
-                bu.innerHTML="Delete"
+                bu.innerHTML="Unbook"
                 bu.addEventListener("click", () => {
                     this.delete(id);
-                    this.refresh()
                 });
                 cell6.appendChild(bu)
+                ind+=1
+                }
+            })
+        },
+        avaiSlots: async function () {
+            let a = await getDocs(collection(db, "Appointment"))
+            let ind = 1
+            a.forEach((docs) => {
+                let yy = docs.data()
+                var table = document.getElementById("table2")
+
+                var date = (yy.date)
+                var start = (yy.starttime)
+                var end = (yy.endtime)
+                var name = (yy.name)
+                var id = (docs.id)
+
+                var today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth()+1; 
+                var yyyy = today.getFullYear();
+                if(dd<10) {
+                    dd='0'+dd;} 
+                if(mm<10) {
+                    mm='0'+mm;} 
+                today = yyyy+'-'+mm+'-'+dd;
+
+                if (date>=today && name==="NA") { // if the date >= now && name === "NA"
+
+                var row = table.insertRow(ind)
+
+                var cell1 = row.insertCell(0)
+                var cell2 = row.insertCell(1)
+                var cell3 = row.insertCell(2)
+                var cell4 = row.insertCell(3)
+                var cell5 = row.insertCell(4)
+                var cell6 = row.insertCell(5)
+
+                cell1.innerHTML = ind
+                cell2.innerHTML = name
+                cell3.innerHTML = date
+                cell4.innerHTML = start
+                cell5.innerHTML = end
+
+                var bu = document.createElement("button")
+                bu.className="btn btn-sm btn-danger"
+                bu.innerHTML="Remove"
+                bu.addEventListener("click", () => {
+                    this.deleteSlot(id);
+                });
+                cell6.appendChild(bu)
+            
                 ind+=1
                 }
             })
@@ -112,13 +179,12 @@ export default {
             await updateDoc(doc(db, "Appointment", id), {
                 name: "NA"
             });
+            location.reload()
         },
-        refresh: function refresh(){
-            let tb1 = document.getElementById("table1")
-            while(tb1.rows.length>1){
-                tb1.deleteRow(1)
-            }
-            this.getSlots()
+        deleteSlot: async function(id){
+            alert("You are going to delete this visiting slot.")
+            await deleteDoc(doc(db, "Appointment", id))
+            location.reload()
         },
         generateSlots: async function(){
             var date1 = document.getElementById("date1").value
@@ -178,6 +244,7 @@ export default {
             // await updateDoc(doc(db, "Appointment", slot4.id), {
             //     id: slot4.id
             // });
+            location.reload()
         }
     },
     mounted(){
@@ -188,6 +255,7 @@ export default {
           }
         })
         this.getSlots()
+        this.avaiSlots()
     }
 
 }

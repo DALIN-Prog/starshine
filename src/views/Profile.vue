@@ -3,7 +3,7 @@
 
   <div class="container">
     <div class="row">
-        <h2 id="title" style="text-align:center">Patient Profile Page</h2>
+        <h2 id="title" style="text-align:center">Resident Profile Page</h2>
     </div>
   </div>
 

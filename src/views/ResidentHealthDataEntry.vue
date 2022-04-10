@@ -2,7 +2,7 @@
     <AdminNavBar />
     <div class="container">
         <div class="row">
-            <h2 class="title mt-5 mb-4">Add Vital Point For Resident</h2>
+            <h2 class="title mt-5 mb-4">Add Vital Point For {{resident}}</h2>
         </div>
     </div>
 
@@ -88,6 +88,7 @@ export default {
         back: "/HistoricalData/",
         user:false,
         admin: true,
+        resident:"",
         form: {
             temp: "",
             hr: "",
@@ -114,7 +115,10 @@ export default {
                       //console.log(data)
                       this.admin = data.isAdmin
                       //console.log(this.user);
-                  }
+                    }
+                    if (docs.id === this.id) {
+                      this.resident = data.name
+                    }
               })
             } 
         })

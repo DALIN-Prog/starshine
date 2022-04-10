@@ -27,7 +27,7 @@
                   </div>
                   <div class="modal-body">
                     Body temperatures is an early warning sign of infection. <br>
-                    A <strong>normal</strong> healthy temperature ranges from <strong>36.1℃</strong>to <strong>37.2℃</strong>
+                    A <strong>normal</strong> healthy temperature ranges from <strong>36.1℃</strong> to <strong>37.2℃</strong>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -58,7 +58,7 @@
                   </div>
                   <div class="modal-body">
                     Blood pressure is vital because it delivers white blood cells and antibodies for immunity and hormones such as insulin. <br>
-                    Men and women who are <strong>65 or older</strong> should aim for a blood pressure l<strong>ower than 130/80 mm Hg</strong>.
+                    Men and women who are <strong>65 or older</strong> should aim for a blood pressure <strong>lower than 130/80 mm Hg</strong>.
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

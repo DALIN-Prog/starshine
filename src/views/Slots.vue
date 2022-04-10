@@ -100,8 +100,8 @@ export default {
                 bu.className="btn btn-sm btn-primary"
                 bu.innerHTML="Book"
                 bu.addEventListener("click", () => {
+                    console.log(id)
                     this.book(id);
-                    this.refresh()
                 });
                 cell5.appendChild(bu)
                 ind+=1
@@ -113,6 +113,7 @@ export default {
             await updateDoc(doc(db, "Appointment", id), {
                 name: this.username
             });
+            location.reload()
         },
         mySlots: async function () {
             let a = await getDocs(collection(db, "Appointment"))
@@ -158,8 +159,9 @@ export default {
                 bu.className="btn btn-sm btn-secondary"
                 bu.innerHTML="Cancel"
                 bu.addEventListener("click", () => {
+                    // console.log(id)
                     this.cancel(id);
-                    this.refresh()
+                    // location.reload()
                 });
                 cell6.appendChild(bu)
                 ind+=1
@@ -171,19 +173,9 @@ export default {
             await updateDoc(doc(db, "Appointment", id), {
                 name: "NA"
             });
+            location.reload()
+            // console.log(id)
         },
-        refresh: function refresh(){
-            let tb = document.getElementById("table")
-            while(tb.rows.length>1){
-                tb.deleteRow(1)
-            }
-            let tb1 = document.getElementById("table1")
-            while(tb1.rows.length>1){
-                tb1.deleteRow(1)
-            }
-            this.getSlots()
-            this.mySlots()
-        }
     },
     mounted(){
         const auth = getAuth();
